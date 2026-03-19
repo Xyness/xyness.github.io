@@ -643,6 +643,17 @@
             display: inline-block;
         }
 
+        .project-prod-badge {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #34d399;
+            background: rgba(52, 211, 153, 0.1);
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
+
         /* ── Minecraft section ── */
         .minecraft-section {
             margin-top: 48px;
@@ -1212,7 +1223,10 @@
             <a href="https://github.com/Xyness/GitPulse" target="_blank" rel="noopener" class="project-card fade-in">
                 <div class="project-header">
                     <span class="project-name">GitPulse</span>
-                    <span class="project-arrow">↗</span>
+                    <span style="display:flex;align-items:center;gap:10px;">
+                        <span class="project-prod-badge">prod</span>
+                        <span class="project-arrow">↗</span>
+                    </span>
                 </div>
                 <p class="project-desc">
                     Interactive GitHub activity visualizer that transforms profile data into stunning
@@ -1236,7 +1250,10 @@
             <div class="minecraft-header">Open Source Minecraft Plugins</div>
             <div class="minecraft-grid">
                 <a href="https://github.com/Xyness/SimpleClaimSystem" target="_blank" rel="noopener" class="minecraft-card fade-in">
-                    <div class="project-name">SimpleClaimSystem</div>
+                    <div style="display:flex;align-items:center;justify-content:space-between;">
+                        <span class="project-name">SimpleClaimSystem</span>
+                        <span class="project-prod-badge">prod</span>
+                    </div>
                     <p class="project-desc">Full-featured land claiming plugin for Minecraft servers. Widely adopted by the community.</p>
                     <div class="mc-stats">
                         <span><span class="star-color">★</span> 31</span>
