@@ -534,6 +534,28 @@
             border-radius: 4px;
         }
 
+        .project-open-source-badge {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #21bce2;
+            background: rgba(52, 211, 153, 0.1);
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
+
+        .project-paid-badge {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #ff3f4f;
+            background: rgba(52, 211, 153, 0.1);
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
+
         /* ── Minecraft section ── */
         .minecraft-section {
             margin-top: 48px;
@@ -1046,26 +1068,67 @@
 
         <!-- Minecraft plugins -->
         <div class="minecraft-section">
-            <div class="minecraft-header">Open Source Minecraft Plugins</div>
+            <div class="minecraft-header">Minecraft Plugins</div>
             <div class="minecraft-grid">
-                <a href="https://github.com/Xyness/SimpleClaimSystem" target="_blank" rel="noopener" class="minecraft-card fade-in">
+                <a href="https://celestis.dev/plugins/simpleclaimsystem" target="_blank" rel="noopener" class="minecraft-card fade-in">
                     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
                         <span class="project-name">SimpleClaimSystem</span>
-                        <span class="project-prod-badge">prod</span>
+                        <span class="project-open-source-badge">open source</span>
                     </div>
                     <p class="project-desc">Full-featured land claiming plugin for Minecraft servers. Widely adopted by the community.</p>
                     <div class="mc-stats">
-                        <span><span class="star-color">★</span> 31</span>
-                        <span>🍴 27</span>
                         <span>Java</span>
                     </div>
                 </a>
-                <a href="https://github.com/Xyness/PlayersAPI" target="_blank" rel="noopener" class="minecraft-card fade-in">
+                <a href="https://celestis.dev/plugins/simpleclaimsystem2" target="_blank" rel="noopener" class="minecraft-card fade-in">
                     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-                        <span class="project-name">PlayersAPI</span>
-                        <span class="project-prod-badge">prod</span>
+                        <span class="project-name">SimpleClaimSystem2</span>
+                        <span class="project-paid-badge">paid</span>
                     </div>
-                    <p class="project-desc">A lightweight Minecraft plugin API for managing player data with multi-level caching, async operations, and Folia support.</p>
+                    <p class="project-desc">Paid plugin - Full-featured land claiming plugin for Minecraft servers. Widely adopted by the community.</p>
+                    <div class="mc-stats">
+                        <span>Java</span>
+                    </div>
+                </a>
+                <a href="https://github.com/Xyness/XCore" target="_blank" rel="noopener" class="minecraft-card fade-in">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                        <span class="project-name">XCore</span>
+                        <span class="project-open-source-badge">open source</span>
+                    </div>
+                    <p class="project-desc">Core framework for the X ecosystem of Minecraft plugins. Folia compatible. Provides centralized database management, multi-layer caching, cross-server synchronization and a lot of great features.</p>
+                    <div class="mc-stats">
+                        <span>Java</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                        <span>HTML</span>
+                    </div>
+                </a>
+                <a href="https://celestis.dev/plugins/xbans" target="_blank" rel="noopener" class="minecraft-card fade-in">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                        <span class="project-name">XBans</span>
+                        <span class="project-paid-badge">paid</span>
+                    </div>
+                    <p class="project-desc">Advanced sanctions, security, and AI-powered moderation addon for XCore.</p>
+                    <div class="mc-stats">
+                        <span>Java</span>
+                    </div>
+                </a>
+                <a href="https://celestis.dev/plugins/xauctionhouse" target="_blank" rel="noopener" class="minecraft-card fade-in">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                        <span class="project-name">XAuctionHouse</span>
+                        <span class="project-paid-badge">paid</span>
+                    </div>
+                    <p class="project-desc">Auction house addon for XCore with fixed-price listings, live bidding auctions, and multi-currency support.</p>
+                    <div class="mc-stats">
+                        <span>Java</span>
+                    </div>
+                </a>
+                <a href="https://celestis.dev/plugins/xlogin" target="_blank" rel="noopener" class="minecraft-card fade-in">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                        <span class="project-name">XLogin</span>
+                        <span class="project-paid-badge">paid</span>
+                    </div>
+                    <p class="project-desc">Advanced authentication addon for XCore. Provides a complete login/register system with premium auto-login, 2FA, cross-server sessions, and proxy support.</p>
                     <div class="mc-stats">
                         <span>Java</span>
                     </div>
