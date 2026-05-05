@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xyness — Portfolio</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <meta name="description" content="Xyness — CS, Big Data & AI student. Building tools that solve real problems.">
+    <meta name="description" content="Xyness — student in CS, big data, and AI. I build software, usually because I wanted the thing to exist.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after {
             margin: 0;
@@ -17,27 +17,30 @@
         }
 
         :root {
-            --bg: #0a0a0f;
-            --surface: rgba(255, 255, 255, 0.03);
-            --surface-hover: rgba(255, 255, 255, 0.06);
-            --border: rgba(255, 255, 255, 0.06);
-            --border-hover: rgba(255, 255, 255, 0.12);
-            --text: #e4e4e7;
-            --text-secondary: #71717a;
-            --text-tertiary: #3f3f46;
-            --accent: #22d3ee;
-            --accent-dim: rgba(34, 211, 238, 0.1);
-            --green: #4ade80;
-            --green-dim: rgba(74, 222, 128, 0.1);
-            --purple: #a78bfa;
-            --purple-dim: rgba(167, 139, 250, 0.1);
-            --orange: #fb923c;
-            --orange-dim: rgba(251, 146, 60, 0.1);
-            --red: #f87171;
-            --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+            --bg: #0c0e14;
+            --surface: rgba(230, 233, 245, 0.03);
+            --surface-hover: rgba(230, 233, 245, 0.06);
+            --border: rgba(230, 233, 245, 0.09);
+            --border-hover: rgba(230, 233, 245, 0.18);
+            --text: #dcdee5;
+            --text-secondary: #888b95;
+            --text-tertiary: #4d4f59;
+            --accent: #7e8de0;
+            --accent-bright: #9aa7ed;
+            --accent-soft: rgba(126, 141, 224, 0.14);
+            --coral: #5fb6a8;
+            --coral-soft: rgba(95, 182, 168, 0.14);
+            --plum: #9c7ed6;
+            --plum-soft: rgba(156, 126, 214, 0.14);
+            --sand: #6daee0;
+            --sand-soft: rgba(109, 174, 224, 0.14);
+            --rose: #d97091;
+            --rose-soft: rgba(217, 112, 145, 0.14);
+            --font-serif: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --radius: 16px;
-            --radius-sm: 10px;
+            --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+            --radius: 12px;
+            --radius-sm: 8px;
         }
 
         html {
@@ -48,17 +51,23 @@
 
         body {
             font-family: var(--font-sans);
-            background: var(--bg);
+            background:
+                radial-gradient(ellipse 90% 50% at 50% -10%, rgba(126, 141, 224, 0.07), transparent 60%),
+                var(--bg);
             color: var(--text);
-            line-height: 1.6;
+            line-height: 1.65;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+            font-weight: 400;
+            min-height: 100vh;
         }
 
         ::selection {
             background: var(--accent);
             color: var(--bg);
         }
+
+        a { color: inherit; }
 
         /* ── Navigation ── */
         nav {
@@ -67,48 +76,49 @@
             left: 0;
             right: 0;
             z-index: 100;
-            padding: 16px 40px;
+            padding: 22px 40px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: rgba(10, 10, 15, 0.85);
-            border-bottom: 1px solid var(--border);
-            transition: padding 0.3s ease;
+            background: rgba(12, 14, 20, 0.78);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid transparent;
+            transition: padding 0.25s ease, border-color 0.25s ease;
         }
 
         nav.scrolled {
-            padding: 12px 40px;
+            padding: 14px 40px;
+            border-bottom-color: var(--border);
         }
 
         .nav-logo {
-            font-family: var(--font-mono);
-            font-size: 16px;
+            font-family: var(--font-serif);
+            font-size: 17px;
             font-weight: 600;
-            color: var(--accent);
+            color: var(--text);
             text-decoration: none;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.4px;
         }
 
-        .nav-logo span {
-            color: var(--text-secondary);
-            font-weight: 400;
+        .nav-logo:hover {
+            color: var(--accent);
         }
 
         .nav-links {
             display: flex;
-            gap: 8px;
+            gap: 4px;
             list-style: none;
         }
 
         .nav-links a {
-            font-family: var(--font-mono);
-            font-size: 13px;
+            font-family: var(--font-sans);
+            font-size: 14px;
             color: var(--text-secondary);
             text-decoration: none;
-            padding: 8px 16px;
-            border-radius: 8px;
+            padding: 8px 14px;
+            border-radius: 6px;
             transition: color 0.2s ease, background 0.2s ease;
-            letter-spacing: -0.3px;
         }
 
         .nav-links a:hover {
@@ -127,8 +137,8 @@
 
         /* ── Sections ── */
         section {
-            padding: 120px 40px;
-            max-width: 1200px;
+            padding: 110px 40px;
+            max-width: 980px;
             margin: 0 auto;
         }
 
@@ -136,25 +146,24 @@
             font-family: var(--font-mono);
             font-size: 12px;
             color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 0.5px;
             margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section-label::before {
-            content: '//';
-            color: var(--text-tertiary);
         }
 
         .section-title {
-            font-size: clamp(28px, 4vw, 42px);
-            font-weight: 700;
-            letter-spacing: -1.5px;
+            font-family: var(--font-serif);
+            font-size: clamp(30px, 4.2vw, 46px);
+            font-weight: 500;
+            letter-spacing: -0.6px;
             line-height: 1.15;
-            margin-bottom: 48px;
+            margin-bottom: 56px;
+            color: var(--text);
+        }
+
+        .section-title em {
+            font-style: normal;
+            color: var(--accent);
+            font-weight: 500;
         }
 
         /* ── Hero ── */
@@ -163,121 +172,84 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding-top: 80px;
+            padding-top: 100px;
+            max-width: 900px;
         }
 
-        .hero-terminal {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            overflow: hidden;
-            max-width: 740px;
-        }
-
-        .terminal-bar {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 18px;
-            background: rgba(255, 255, 255, 0.02);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .terminal-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .terminal-dot:nth-child(1) { background: #ff5f57; }
-        .terminal-dot:nth-child(2) { background: #febc2e; }
-        .terminal-dot:nth-child(3) { background: #28c840; }
-
-        .terminal-title {
-            flex: 1;
-            text-align: center;
+        .hero-greeting {
             font-family: var(--font-mono);
-            font-size: 12px;
-            color: var(--text-tertiary);
-            margin-right: 36px;
+            font-size: 13px;
+            color: var(--accent);
+            margin-bottom: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
         }
 
-        .terminal-body {
-            padding: 28px 24px;
-            font-family: var(--font-mono);
-            font-size: 14px;
-            line-height: 1.9;
+        .hero-name {
+            font-family: var(--font-serif);
+            font-size: clamp(58px, 10vw, 112px);
+            font-weight: 500;
+            letter-spacing: -3px;
+            line-height: 1;
+            margin-bottom: 36px;
+            color: var(--text);
         }
 
-        .terminal-line {
-            opacity: 0;
-            transform: translateY(6px);
-            animation: terminalIn 0.35s ease forwards;
+        .hero-name .dot {
+            color: var(--accent);
         }
 
-        @keyframes terminalIn {
-            to { opacity: 1; transform: translateY(0); }
+        .hero-bio {
+            font-size: clamp(17px, 1.6vw, 19px);
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 640px;
+            margin-bottom: 40px;
         }
 
-        .prompt { color: var(--green); }
-        .prompt-path { color: var(--accent); }
-        .prompt-symbol { color: var(--text-secondary); }
-        .command { color: var(--text); }
-        .output { color: var(--text-secondary); }
-        .output-highlight { color: var(--text); font-weight: 500; }
-        .output-accent { color: var(--accent); }
-        .output-green { color: var(--green); }
-
-        .cursor {
-            display: inline-block;
-            width: 8px;
-            height: 16px;
-            background: var(--accent);
-            animation: blink 1s step-end infinite;
-            vertical-align: text-bottom;
-            margin-left: 2px;
+        .hero-bio strong {
+            color: var(--text);
+            font-weight: 500;
         }
 
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
-
-        .hero-sub {
-            margin-top: 40px;
+        .hero-actions {
             display: flex;
             gap: 12px;
             flex-wrap: wrap;
         }
 
-        .hero-btn {
-            font-family: var(--font-mono);
-            font-size: 13px;
-            padding: 12px 24px;
+        .btn {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 500;
+            padding: 13px 22px;
             border-radius: var(--radius-sm);
             text-decoration: none;
             transition: all 0.2s ease;
-            letter-spacing: -0.3px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid;
         }
 
-        .hero-btn.primary {
+        .btn-primary {
             background: var(--accent);
             color: var(--bg);
-            border: none;
-            font-weight: 600;
+            border-color: var(--accent);
         }
 
-        .hero-btn.primary:hover {
-            background: #06b6d4;
-            transform: translateY(-1px);
+        .btn-primary:hover {
+            background: var(--accent-bright);
+            border-color: var(--accent-bright);
         }
 
-        .hero-btn.secondary {
+        .btn-ghost {
             background: transparent;
             color: var(--text-secondary);
-            border: 1px solid var(--border);
+            border-color: var(--border);
         }
 
-        .hero-btn.secondary:hover {
+        .btn-ghost:hover {
             color: var(--text);
             border-color: var(--border-hover);
             background: var(--surface);
@@ -286,16 +258,20 @@
         /* ── About ── */
         .about-content {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 48px;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 56px;
             align-items: start;
         }
 
         .about-text p {
             color: var(--text-secondary);
-            font-size: 15px;
-            line-height: 1.8;
-            margin-bottom: 20px;
+            font-size: 16px;
+            line-height: 1.75;
+            margin-bottom: 18px;
+        }
+
+        .about-text p:last-child {
+            margin-bottom: 0;
         }
 
         .about-text strong {
@@ -306,17 +282,17 @@
         .about-stats {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 10px;
         }
 
         .stat-card {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: 20px 24px;
+            border-radius: var(--radius);
+            padding: 18px 22px;
             display: flex;
-            align-items: center;
-            gap: 16px;
+            align-items: flex-start;
+            gap: 14px;
             transition: border-color 0.2s ease, background 0.2s ease;
         }
 
@@ -325,46 +301,50 @@
             background: var(--surface-hover);
         }
 
-        .stat-icon {
-            font-size: 20px;
-            width: 44px;
-            height: 44px;
+        .stat-mark {
+            font-family: var(--font-mono);
+            font-weight: 500;
+            font-size: 12px;
+            width: 36px;
+            height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 10px;
+            border-radius: 8px;
             flex-shrink: 0;
+            line-height: 1;
         }
 
-        .stat-icon.cyan { background: var(--accent-dim); }
-        .stat-icon.green { background: var(--green-dim); }
-        .stat-icon.purple { background: var(--purple-dim); }
+        .stat-mark.sage  { background: var(--accent-soft); color: var(--accent); }
+        .stat-mark.coral { background: var(--coral-soft);  color: var(--coral); }
+        .stat-mark.plum  { background: var(--plum-soft);   color: var(--plum); }
 
         .stat-label {
             font-family: var(--font-mono);
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-tertiary);
-            margin-bottom: 2px;
+            margin-bottom: 3px;
+            letter-spacing: 0.4px;
         }
 
         .stat-value {
-            font-size: 15px;
-            font-weight: 500;
+            font-size: 14.5px;
             color: var(--text);
+            line-height: 1.4;
         }
 
         /* ── Skills ── */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 16px;
+            gap: 14px;
         }
 
         .skill-category {
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 28px;
+            padding: 24px 26px;
             transition: border-color 0.2s ease, background 0.2s ease;
         }
 
@@ -376,40 +356,37 @@
         .skill-category-header {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
+            gap: 10px;
+            margin-bottom: 18px;
         }
 
-        .skill-category-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
+        .skill-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
         }
 
         .skill-category-name {
-            font-family: var(--font-mono);
-            font-size: 13px;
-            font-weight: 600;
+            font-family: var(--font-serif);
+            font-size: 17px;
+            font-weight: 500;
             color: var(--text);
-            letter-spacing: -0.3px;
+            letter-spacing: -0.2px;
         }
 
         .skill-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
         }
 
         .skill-tag {
             font-family: var(--font-mono);
             font-size: 12px;
-            padding: 6px 12px;
-            border-radius: 6px;
-            background: rgba(255, 255, 255, 0.03);
+            padding: 5px 10px;
+            border-radius: 5px;
+            background: rgba(230, 233, 245, 0.025);
             color: var(--text-secondary);
             border: 1px solid var(--border);
             transition: color 0.2s ease, border-color 0.2s ease;
@@ -424,15 +401,15 @@
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+            gap: 16px;
         }
 
         .project-card {
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 32px;
-            transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+            padding: 28px 30px;
+            transition: border-color 0.25s ease, background 0.25s ease;
             position: relative;
             overflow: hidden;
             text-decoration: none;
@@ -443,28 +420,37 @@
         .project-card:hover {
             border-color: var(--border-hover);
             background: var(--surface-hover);
-            transform: translateY(-2px);
+        }
+
+        .project-badges {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
         }
 
         .project-header {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             justify-content: space-between;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
+            gap: 12px;
         }
 
         .project-name {
-            font-family: var(--font-mono);
-            font-size: 18px;
-            font-weight: 600;
+            font-family: var(--font-serif);
+            font-size: 21px;
+            font-weight: 500;
             color: var(--text);
-            letter-spacing: -0.5px;
+            letter-spacing: -0.3px;
+            line-height: 1.2;
         }
 
         .project-arrow {
             color: var(--text-tertiary);
-            font-size: 18px;
+            font-size: 14px;
             transition: color 0.2s ease, transform 0.2s ease;
+            flex-shrink: 0;
         }
 
         .project-card:hover .project-arrow {
@@ -472,123 +458,108 @@
             transform: translate(2px, -2px);
         }
 
+        .badge {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            letter-spacing: 0.4px;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        .badge-featured {
+            color: var(--accent);
+            background: var(--accent-soft);
+        }
+
+        .badge-prod {
+            color: var(--coral);
+            background: var(--coral-soft);
+        }
+
+        .badge-open {
+            color: var(--plum);
+            background: var(--plum-soft);
+        }
+
+        .badge-paid {
+            color: var(--rose);
+            background: var(--rose-soft);
+        }
+
         .project-desc {
             color: var(--text-secondary);
-            font-size: 14px;
+            font-size: 14.5px;
             line-height: 1.7;
-            margin-bottom: 24px;
+            margin-bottom: 22px;
             flex: 1;
         }
 
         .project-tech {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 20px;
+            gap: 6px;
         }
 
         .project-tech span {
             font-family: var(--font-mono);
             font-size: 11px;
-            padding: 4px 10px;
-            border-radius: 5px;
-            background: var(--accent-dim);
-            color: var(--accent);
+            padding: 4px 9px;
+            border-radius: 4px;
+            background: rgba(230, 233, 245, 0.025);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
             letter-spacing: 0.2px;
-        }
-
-        .project-meta {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            font-family: var(--font-mono);
-            font-size: 12px;
-            color: var(--text-tertiary);
         }
 
         .project-card.featured {
             grid-column: span 2;
         }
 
-        .project-featured-badge {
-            font-family: var(--font-mono);
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--accent);
-            background: var(--accent-dim);
-            padding: 4px 10px;
-            border-radius: 4px;
-            margin-bottom: 12px;
-            display: inline-block;
-        }
-
-        .project-prod-badge {
-            font-family: var(--font-mono);
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #34d399;
-            background: rgba(52, 211, 153, 0.1);
-            padding: 4px 10px;
-            border-radius: 4px;
-        }
-
-        .project-open-source-badge {
-            font-family: var(--font-mono);
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #21bce2;
-            background: rgba(52, 211, 153, 0.1);
-            padding: 4px 10px;
-            border-radius: 4px;
-        }
-
-        .project-paid-badge {
-            font-family: var(--font-mono);
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #ff3f4f;
-            background: rgba(52, 211, 153, 0.1);
-            padding: 4px 10px;
-            border-radius: 4px;
-        }
-
         /* ── Minecraft section ── */
         .minecraft-section {
-            margin-top: 48px;
+            margin-top: 64px;
         }
 
-        .minecraft-header {
-            font-family: var(--font-mono);
-            font-size: 14px;
-            color: var(--text-tertiary);
-            margin-bottom: 20px;
+        .minecraft-divider {
             display: flex;
-            align-items: center;
-            gap: 12px;
+            align-items: baseline;
+            gap: 14px;
+            margin-bottom: 8px;
         }
 
-        .minecraft-header::after {
-            content: '';
+        .minecraft-divider h3 {
+            font-family: var(--font-serif);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text);
+            letter-spacing: -0.4px;
+        }
+
+        .minecraft-divider .line {
             flex: 1;
             height: 1px;
             background: var(--border);
         }
 
+        .minecraft-intro {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            line-height: 1.65;
+            max-width: 600px;
+        }
+
         .minecraft-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
+            gap: 12px;
         }
 
         .minecraft-card {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: 24px;
+            border-radius: var(--radius);
+            padding: 22px 24px;
             transition: border-color 0.2s ease, background 0.2s ease;
             text-decoration: none;
             display: block;
@@ -599,54 +570,64 @@
             background: var(--surface-hover);
         }
 
-        .minecraft-card .project-name {
-            font-size: 15px;
+        .minecraft-card .project-header {
             margin-bottom: 8px;
         }
 
+        .minecraft-card .project-name {
+            font-size: 17px;
+        }
+
         .minecraft-card .project-desc {
-            font-size: 13px;
+            font-size: 13.5px;
             margin-bottom: 14px;
         }
 
         .mc-stats {
             display: flex;
-            gap: 14px;
-            font-family: var(--font-mono);
-            font-size: 12px;
-            color: var(--text-tertiary);
+            gap: 6px;
+            flex-wrap: wrap;
         }
 
-        .mc-stats .star-color {
-            color: var(--orange);
+        .mc-stats span {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-tertiary);
+            padding: 3px 9px;
+            border-radius: 4px;
+            border: 1px solid var(--border);
         }
 
         /* ── Contact ── */
         #contact {
-            text-align: center;
+            max-width: 780px;
         }
 
         .contact-desc {
             color: var(--text-secondary);
-            font-size: 16px;
-            max-width: 500px;
-            margin: -24px auto 48px;
+            font-size: 17px;
             line-height: 1.7;
+            margin: -36px 0 36px;
+            max-width: 600px;
+        }
+
+        .contact-desc strong {
+            color: var(--text);
+            font-weight: 500;
         }
 
         .contact-links {
             display: flex;
-            justify-content: center;
-            gap: 16px;
+            gap: 12px;
             flex-wrap: wrap;
         }
 
         .contact-link {
-            font-family: var(--font-mono);
-            font-size: 14px;
-            color: var(--text-secondary);
+            font-family: var(--font-sans);
+            font-size: 14.5px;
+            color: var(--text);
             text-decoration: none;
-            padding: 16px 28px;
+            padding: 14px 22px;
             border-radius: var(--radius-sm);
             border: 1px solid var(--border);
             background: var(--surface);
@@ -659,35 +640,36 @@
         .contact-link:hover {
             border-color: var(--accent);
             color: var(--accent);
-            background: var(--accent-dim);
-            transform: translateY(-2px);
+            background: var(--accent-soft);
         }
 
         .contact-link svg {
-            width: 18px;
-            height: 18px;
+            width: 17px;
+            height: 17px;
             flex-shrink: 0;
         }
 
         /* ── Footer ── */
         footer {
             text-align: center;
-            padding: 40px;
-            font-family: var(--font-mono);
-            font-size: 12px;
+            padding: 40px 24px;
+            font-family: var(--font-sans);
+            font-size: 13px;
             color: var(--text-tertiary);
             border-top: 1px solid var(--border);
         }
 
-        footer span {
-            color: var(--accent);
+        footer .name {
+            font-family: var(--font-serif);
+            font-weight: 600;
+            color: var(--text-secondary);
         }
 
         /* ── Fade in ── */
         .fade-in {
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            transform: translateY(16px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
         .fade-in.visible {
@@ -697,12 +679,15 @@
 
         /* ── Responsive ── */
         @media (max-width: 900px) {
-            section { padding: 80px 24px; }
-            nav { padding: 14px 20px; }
-            .about-content { grid-template-columns: 1fr; }
+            section { padding: 80px 28px; }
+            nav { padding: 18px 22px; }
+            nav.scrolled { padding: 12px 22px; }
+            .about-content { grid-template-columns: 1fr; gap: 36px; }
             .projects-grid { grid-template-columns: 1fr; }
             .project-card.featured { grid-column: span 1; }
             .minecraft-grid { grid-template-columns: 1fr; }
+            #hero { padding-top: 90px; }
+            .section-title { margin-bottom: 44px; }
         }
 
         @media (max-width: 640px) {
@@ -713,7 +698,9 @@
                 left: 0;
                 right: 0;
                 flex-direction: column;
-                background: rgba(10, 10, 15, 0.97);
+                background: rgba(12, 14, 20, 0.97);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
                 border-bottom: 1px solid var(--border);
                 padding: 12px;
             }
@@ -721,15 +708,12 @@
             .nav-links.open { display: flex; }
             .nav-mobile-toggle { display: block; }
 
-            .terminal-body {
-                font-size: 12px;
-                padding: 20px 16px;
-            }
-
-            .hero-sub { flex-direction: column; }
-            .hero-btn { text-align: center; }
+            section { padding: 70px 22px; }
+            .hero-actions { flex-direction: column; align-items: stretch; }
+            .btn { justify-content: center; }
             .skills-grid { grid-template-columns: 1fr; }
-            .section-title { margin-bottom: 32px; }
+            .section-title { margin-bottom: 36px; }
+            .contact-desc { margin-top: -28px; }
         }
     </style>
 </head>
@@ -737,9 +721,9 @@
 
     <!-- Navigation -->
     <nav id="nav">
-        <a href="#hero" class="nav-logo">xyness<span>@portfolio</span></a>
+        <a href="#hero" class="nav-logo">Xyness</a>
         <button class="nav-mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">
-            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6">
                 <path d="M3 6h18M3 12h18M3 18h18"/>
             </svg>
         </button>
@@ -753,91 +737,67 @@
 
     <!-- Hero -->
     <section id="hero">
-        <div class="hero-terminal">
-            <div class="terminal-bar">
-                <div class="terminal-dot"></div>
-                <div class="terminal-dot"></div>
-                <div class="terminal-dot"></div>
-                <span class="terminal-title">xyness — bash</span>
-            </div>
-            <div class="terminal-body">
-                <div class="terminal-line" style="animation-delay: 0.2s">
-                    <span class="prompt">xyness</span><span class="prompt-path">@portfolio</span><span class="prompt-symbol"> ~ $ </span><span class="command">whoami</span>
-                </div>
-                <div class="terminal-line" style="animation-delay: 0.6s">
-                    <span class="output">CS, Big Data & AI student</span>
-                </div>
-                <div class="terminal-line" style="animation-delay: 1.0s">
-                    <span class="output">Building tools that <span class="output-highlight">solve real problems</span></span>
-                </div>
-                <div class="terminal-line" style="animation-delay: 1.6s">&nbsp;</div>
-                <div class="terminal-line" style="animation-delay: 2.0s">
-                    <span class="prompt">xyness</span><span class="prompt-path">@portfolio</span><span class="prompt-symbol"> ~ $ </span><span class="command">cat focus.txt</span>
-                </div>
-                <div class="terminal-line" style="animation-delay: 2.4s">
-                    <span class="output">→ End-to-end delivery: <span class="output-accent">architecture</span> to <span class="output-accent">deployment</span></span>
-                </div>
-                <div class="terminal-line" style="animation-delay: 2.8s">
-                    <span class="output">→ Exploring systems to <span class="output-green">understand</span> and <span class="output-green">improve</span> them</span>
-                </div>
-                <div class="terminal-line" style="animation-delay: 3.2s">
-                    <span class="output">→ Security is <span class="output-highlight">never</span> an afterthought</span>
-                </div>
-                <div class="terminal-line" style="animation-delay: 3.8s">&nbsp;</div>
-                <div class="terminal-line" style="animation-delay: 4.2s">
-                    <span class="prompt">xyness</span><span class="prompt-path">@portfolio</span><span class="prompt-symbol"> ~ $ </span><span class="cursor"></span>
-                </div>
-            </div>
-        </div>
-
-        <div class="hero-sub">
-            <a href="#projects" class="hero-btn primary">View Projects</a>
-            <a href="#contact" class="hero-btn secondary">Get in Touch</a>
+        <p class="hero-greeting">Hi, I'm</p>
+        <h1 class="hero-name">Xyness<span class="dot">.</span></h1>
+        <p class="hero-bio">
+            I'm a student in computer science, big data, and AI. Most of what
+            I build started because I wanted the thing to exist — a tool for
+            a server I run, a script to skip a chore I was tired of doing,
+            a side project to learn something I didn't know yet.
+        </p>
+        <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">See what I've built</a>
+            <a href="#contact" class="btn btn-ghost">Get in touch</a>
         </div>
     </section>
 
     <!-- About -->
     <section id="about">
-        <div class="section-label">About</div>
-        <h2 class="section-title">Student by day.<br>Builder by night.</h2>
+        <div class="section-label">about</div>
+        <h2 class="section-title">A bit about <em>me</em>.</h2>
         <div class="about-content">
             <div class="about-text fade-in">
                 <p>
-                    I'm a <strong>Computer Science, Big Data & AI</strong> student focused on crafting
-                    systems that work end-to-end — from initial architecture decisions through to
-                    production deployment.
+                    I'm studying <strong>computer science, big data, and AI</strong>,
+                    with math and stats on the side. School covers the theory; the
+                    projects on this page are how I actually learn — by building,
+                    breaking, and trying again.
                 </p>
                 <p>
-                    I like diving deep into how things work under the hood. Whether it's
-                    building a real-time ML pipeline, a face recognition system, or an autonomous
-                    AI agent — I care about the full stack, the performance, and especially the
-                    <strong>security</strong>.
+                    I tend to follow projects all the way through, from the first
+                    architecture sketch to the boring maintenance afterwards.
+                    <strong>Security</strong> gets a lot of my attention, mostly
+                    because I run things and have learned the hard way what
+                    happens when you don't.
                 </p>
                 <p>
-                    Open to interesting projects and collaborations. If you're building something
-                    cool, let's talk.
+                    Minecraft plugins are the side I keep coming back to —
+                    there's a small collection of them at the bottom of this page.
+                </p>
+                <p>
+                    If you're working on something and want to chat, my inbox is open.
                 </p>
             </div>
             <div class="about-stats fade-in">
                 <div class="stat-card">
-                    <div class="stat-icon cyan">🎓</div>
+                    <div class="stat-mark sage">01</div>
                     <div>
-                        <div class="stat-label">EDUCATION</div>
-                        <div class="stat-value">CS, Big Data, AI, Maths & Stats</div>
+                        <div class="stat-label">studying</div>
+                        <div class="stat-value">CS, big data, AI, math, stats</div>
                     </div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon green">🌍</div>
+                    <div class="stat-mark coral">02</div>
                     <div>
-                        <div class="stat-label">LANGUAGES</div>
-                        <div class="stat-value">French · English · Spanish</div>
+                        <div class="stat-label">languages</div>
+                        <div class="stat-value">French, English, Spanish</div>
                     </div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon purple">⚡</div>
+                    <div class="stat-mark plum">03</div>
                     <div>
-                        <div class="stat-label">FOCUS</div>
-                        <div class="stat-value">Full-stack · Data · Security</div>
+                        <div class="stat-label">interests</div>
+                        <div class="stat-value">Full-stack, data, security</div>
                     </div>
                 </div>
             </div>
@@ -846,17 +806,17 @@
 
     <!-- Skills -->
     <section id="skills">
-        <div class="section-label">Skills</div>
-        <h2 class="section-title">Tech stack.</h2>
+        <div class="section-label">skills</div>
+        <h2 class="section-title">What I work <em>with</em>.</h2>
         <div class="skills-grid">
             <div class="skill-category fade-in">
                 <div class="skill-category-header">
-                    <div class="skill-category-icon" style="background: var(--accent-dim); color: var(--accent);">⌨</div>
+                    <span class="skill-dot" style="background: var(--accent);"></span>
                     <span class="skill-category-name">Languages</span>
                 </div>
                 <div class="skill-tags">
                     <span class="skill-tag">Python</span>
-                    <span class="skill-tag">JavaScript ES6+</span>
+                    <span class="skill-tag">JavaScript</span>
                     <span class="skill-tag">Rust</span>
                     <span class="skill-tag">Java</span>
                     <span class="skill-tag">SQL</span>
@@ -866,12 +826,12 @@
             </div>
             <div class="skill-category fade-in">
                 <div class="skill-category-header">
-                    <div class="skill-category-icon" style="background: var(--green-dim); color: var(--green);">⚙</div>
+                    <span class="skill-dot" style="background: var(--coral);"></span>
                     <span class="skill-category-name">Backend</span>
                 </div>
                 <div class="skill-tags">
                     <span class="skill-tag">REST APIs</span>
-                    <span class="skill-tag">MVC Architecture</span>
+                    <span class="skill-tag">MVC</span>
                     <span class="skill-tag">Node.js</span>
                     <span class="skill-tag">FastAPI</span>
                     <span class="skill-tag">Next.js</span>
@@ -879,8 +839,8 @@
             </div>
             <div class="skill-category fade-in">
                 <div class="skill-category-header">
-                    <div class="skill-category-icon" style="background: var(--purple-dim); color: var(--purple);">☁</div>
-                    <span class="skill-category-name">DevOps & Cloud</span>
+                    <span class="skill-dot" style="background: var(--plum);"></span>
+                    <span class="skill-category-name">Infrastructure</span>
                 </div>
                 <div class="skill-tags">
                     <span class="skill-tag">Docker</span>
@@ -892,12 +852,12 @@
             </div>
             <div class="skill-category fade-in">
                 <div class="skill-category-header">
-                    <div class="skill-category-icon" style="background: var(--orange-dim); color: var(--orange);">🧠</div>
-                    <span class="skill-category-name">Data & AI</span>
+                    <span class="skill-dot" style="background: var(--sand);"></span>
+                    <span class="skill-category-name">Data &amp; AI</span>
                 </div>
                 <div class="skill-tags">
                     <span class="skill-tag">Pandas</span>
-                    <span class="skill-tag">Scikit-learn</span>
+                    <span class="skill-tag">scikit-learn</span>
                     <span class="skill-tag">PyTorch</span>
                     <span class="skill-tag">Apache Spark</span>
                     <span class="skill-tag">Kafka</span>
@@ -907,13 +867,13 @@
             </div>
             <div class="skill-category fade-in">
                 <div class="skill-category-header">
-                    <div class="skill-category-icon" style="background: rgba(248, 113, 113, 0.1); color: var(--red);">🔒</div>
+                    <span class="skill-dot" style="background: var(--rose);"></span>
                     <span class="skill-category-name">Security</span>
                 </div>
                 <div class="skill-tags">
-                    <span class="skill-tag">App Security</span>
-                    <span class="skill-tag">Server Auditing</span>
-                    <span class="skill-tag">Threat Analysis</span>
+                    <span class="skill-tag">App security</span>
+                    <span class="skill-tag">Server auditing</span>
+                    <span class="skill-tag">Threat analysis</span>
                 </div>
             </div>
         </div>
@@ -921,21 +881,25 @@
 
     <!-- Projects -->
     <section id="projects">
-        <div class="section-label">Projects</div>
-        <h2 class="section-title">What I've built.</h2>
+        <div class="section-label">projects</div>
+        <h2 class="section-title">Things I've <em>built</em>.</h2>
 
         <div class="projects-grid">
             <!-- Sentinel -->
             <a href="https://github.com/Xyness/Sentinel" target="_blank" rel="noopener" class="project-card featured fade-in">
-                <span class="project-featured-badge">Featured</span>
+                <div class="project-badges">
+                    <span class="badge badge-featured">featured</span>
+                </div>
                 <div class="project-header">
                     <span class="project-name">Sentinel</span>
                     <span class="project-arrow">↗</span>
                 </div>
                 <p class="project-desc">
-                    Big Data platform that analyzes cryptocurrency data in real time to automatically
-                    detect suspicious behavior using unsupervised machine learning. Processes streaming
-                    data through Spark and Kafka for anomaly detection at scale.
+                    A streaming pipeline that flags suspicious crypto trading
+                    activity in real time. Kafka pulls the data in, Spark does
+                    the heavy lifting, and unsupervised models decide what's
+                    anomalous. Started as a big-data course project; I kept
+                    polishing it after.
                 </p>
                 <div class="project-tech">
                     <span>Apache Spark</span>
@@ -943,12 +907,6 @@
                     <span>FastAPI</span>
                     <span>Streamlit</span>
                     <span>Python</span>
-                    <span>ML</span>
-                </div>
-                <div class="project-meta">
-                    <span>● Big Data</span>
-                    <span>● Anomaly Detection</span>
-                    <span>● Real-time</span>
                 </div>
             </a>
 
@@ -959,18 +917,15 @@
                     <span class="project-arrow">↗</span>
                 </div>
                 <p class="project-desc">
-                    Attack surface analyzer combining a Rust async port scanner, Python recon modules,
-                    FastAPI backend, and Next.js dashboard for comprehensive security reconnaissance.
+                    An attack-surface scanner. The hot path is a Rust async
+                    port scanner; Python handles the recon work; FastAPI serves
+                    it; a Next.js dashboard puts it all in front of you.
                 </p>
                 <div class="project-tech">
-                    <span>Python</span>
                     <span>Rust</span>
-                    <span>Next.js</span>
+                    <span>Python</span>
                     <span>FastAPI</span>
-                </div>
-                <div class="project-meta">
-                    <span>● Security</span>
-                    <span>● Reconnaissance</span>
+                    <span>Next.js</span>
                 </div>
             </a>
 
@@ -981,18 +936,16 @@
                     <span class="project-arrow">↗</span>
                 </div>
                 <p class="project-desc">
-                    Automated security scanner for Linux and macOS that audits system configuration,
-                    authentication, network, and file integrity, then generates a self-contained HTML report.
+                    A security audit script for Linux and macOS. It walks
+                    through config, auth, network, and file integrity, then
+                    drops a self-contained HTML report you can read offline.
+                    I wrote it because I was tired of running the same checks
+                    by hand.
                 </p>
                 <div class="project-tech">
                     <span>Python</span>
                     <span>Jinja</span>
                     <span>JavaScript</span>
-                    <span>CSS</span>
-                </div>
-                <div class="project-meta">
-                    <span>● Security</span>
-                    <span>● System Audit</span>
                 </div>
             </a>
 
@@ -1003,18 +956,15 @@
                     <span class="project-arrow">↗</span>
                 </div>
                 <p class="project-desc">
-                    Real-time face recognition system with a sci-fi HUD overlay. Uses ArcFace
-                    embeddings via InsightFace for accurate identification with a sleek visual interface.
+                    Real-time face recognition through a webcam, with a sci-fi
+                    HUD overlay because I thought it'd look good. ArcFace
+                    embeddings via InsightFace handle the actual matching.
                 </p>
                 <div class="project-tech">
                     <span>FastAPI</span>
                     <span>InsightFace</span>
                     <span>OpenCV</span>
                     <span>JavaScript</span>
-                </div>
-                <div class="project-meta">
-                    <span>● Computer Vision</span>
-                    <span>● Deep Learning</span>
                 </div>
             </a>
 
@@ -1025,8 +975,9 @@
                     <span class="project-arrow">↗</span>
                 </div>
                 <p class="project-desc">
-                    AI-powered autonomous financial market intelligence agent. Monitors crypto markets,
-                    analyzes trends, and provides actionable insights through an intelligent pipeline.
+                    An autonomous agent that watches crypto markets and writes
+                    up what it sees. LangGraph orchestrates the steps, OpenAI
+                    does the writing, the rest is plumbing.
                 </p>
                 <div class="project-tech">
                     <span>Next.js</span>
@@ -1034,104 +985,129 @@
                     <span>LangGraph</span>
                     <span>OpenAI</span>
                 </div>
-                <div class="project-meta">
-                    <span>● AI Agent</span>
-                    <span>● Finance</span>
-                </div>
             </a>
 
             <!-- GitPulse -->
             <a href="https://github.com/Xyness/GitPulse" target="_blank" rel="noopener" class="project-card fade-in">
+                <div class="project-badges">
+                    <span class="badge badge-prod">prod</span>
+                </div>
                 <div class="project-header">
                     <span class="project-name">GitPulse</span>
-                    <span style="display:flex;align-items:center;gap:10px;">
-                        <span class="project-prod-badge">prod</span>
-                        <span class="project-arrow">↗</span>
-                    </span>
+                    <span class="project-arrow">↗</span>
                 </div>
                 <p class="project-desc">
-                    Interactive GitHub activity visualizer that transforms profile data into stunning
-                    charts and animations. Features constellation graphs, contribution heatmaps, and shareable GitHub Wrapped summaries.
+                    Turns your GitHub history into something nicer to look at —
+                    heatmaps, constellation graphs, a year-end recap you can
+                    share. Live and shipping.
                 </p>
                 <div class="project-tech">
                     <span>Next.js</span>
                     <span>TypeScript</span>
                     <span>D3.js</span>
-                    <span>Tailwind CSS</span>
-                </div>
-                <div class="project-meta">
-                    <span>● Data Visualization</span>
-                    <span>● GitHub API</span>
+                    <span>Tailwind</span>
                 </div>
             </a>
         </div>
 
         <!-- Minecraft plugins -->
         <div class="minecraft-section">
-            <div class="minecraft-header">Minecraft Plugins</div>
+            <div class="minecraft-divider">
+                <h3>Minecraft plugins</h3>
+                <span class="line"></span>
+            </div>
+            <p class="minecraft-intro">
+                Some open source, some commercial — all running on real servers.
+                It's the corner of programming I keep coming back to.
+            </p>
             <div class="minecraft-grid">
                 <a href="https://celestis.dev/plugins/simpleclaimsystem" target="_blank" rel="noopener" class="minecraft-card fade-in">
-                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                    <div class="project-header">
                         <span class="project-name">SimpleClaimSystem</span>
-                        <span class="project-open-source-badge">open source</span>
+                        <span class="badge badge-open">open source</span>
                     </div>
-                    <p class="project-desc">Full-featured land claiming plugin for Minecraft servers. Widely adopted by the community.</p>
-                    <div class="mc-stats">
-                        <span>Java</span>
-                    </div>
+                    <p class="project-desc">
+                        Land claiming for Minecraft servers. Picked up by quite
+                        a few communities along the way.
+                    </p>
+                    <div class="mc-stats"><span>Java</span></div>
                 </a>
+
                 <a href="https://celestis.dev/plugins/simpleclaimsystem2" target="_blank" rel="noopener" class="minecraft-card fade-in">
-                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-                        <span class="project-name">SimpleClaimSystem2</span>
-                        <span class="project-paid-badge">paid</span>
+                    <div class="project-header">
+                        <span class="project-name">SimpleClaimSystem 2</span>
+                        <span class="badge badge-paid">paid</span>
                     </div>
-                    <p class="project-desc">Paid plugin - Full-featured land claiming plugin for Minecraft servers. Widely adopted by the community.</p>
-                    <div class="mc-stats">
-                        <span>Java</span>
-                    </div>
+                    <p class="project-desc">
+                        The follow-up to SimpleClaimSystem. Same idea, more
+                        features, sold on celestis.dev.
+                    </p>
+                    <div class="mc-stats"><span>Java</span></div>
                 </a>
+
                 <a href="https://github.com/Xyness/XCore" target="_blank" rel="noopener" class="minecraft-card fade-in">
-                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                    <div class="project-header">
                         <span class="project-name">XCore</span>
-                        <span class="project-open-source-badge">open source</span>
+                        <span class="badge badge-open">open source</span>
                     </div>
-                    <p class="project-desc">Core framework for the X ecosystem of Minecraft plugins. Folia compatible. Provides centralized database management, multi-layer caching, cross-server synchronization and a lot of great features.</p>
+                    <p class="project-desc">
+                        The framework everything else here sits on. Database
+                        layer, multi-tier caching, cross-server sync. Folia
+                        compatible.
+                    </p>
                     <div class="mc-stats">
                         <span>Java</span>
-                        <span>CSS</span>
                         <span>JavaScript</span>
-                        <span>HTML</span>
+                        <span>HTML/CSS</span>
                     </div>
                 </a>
+
                 <a href="https://celestis.dev/plugins/xbans" target="_blank" rel="noopener" class="minecraft-card fade-in">
-                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                    <div class="project-header">
                         <span class="project-name">XBans</span>
-                        <span class="project-paid-badge">paid</span>
+                        <span class="badge badge-paid">paid</span>
                     </div>
-                    <p class="project-desc">Advanced sanctions, security, and AI-powered moderation addon for XCore.</p>
-                    <div class="mc-stats">
-                        <span>Java</span>
-                    </div>
+                    <p class="project-desc">
+                        Sanctions and AI-assisted moderation that plug into XCore.
+                    </p>
+                    <div class="mc-stats"><span>Java</span></div>
                 </a>
+
                 <a href="https://celestis.dev/plugins/xauctionhouse" target="_blank" rel="noopener" class="minecraft-card fade-in">
-                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                    <div class="project-header">
                         <span class="project-name">XAuctionHouse</span>
-                        <span class="project-paid-badge">paid</span>
+                        <span class="badge badge-paid">paid</span>
                     </div>
-                    <p class="project-desc">Auction house addon for XCore with fixed-price listings, live bidding auctions, and multi-currency support.</p>
-                    <div class="mc-stats">
-                        <span>Java</span>
-                    </div>
+                    <p class="project-desc">
+                        An auction house for XCore servers — fixed-price listings,
+                        live bidding, multi-currency.
+                    </p>
+                    <div class="mc-stats"><span>Java</span></div>
                 </a>
+
                 <a href="https://celestis.dev/plugins/xlogin" target="_blank" rel="noopener" class="minecraft-card fade-in">
-                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                    <div class="project-header">
                         <span class="project-name">XLogin</span>
-                        <span class="project-paid-badge">paid</span>
+                        <span class="badge badge-paid">paid</span>
                     </div>
-                    <p class="project-desc">Advanced authentication addon for XCore. Provides a complete login/register system with premium auto-login, 2FA, cross-server sessions, and proxy support.</p>
-                    <div class="mc-stats">
-                        <span>Java</span>
+                    <p class="project-desc">
+                        Login and register flow with 2FA, premium auto-login,
+                        cross-server sessions, and proxy support.
+                    </p>
+                    <div class="mc-stats"><span>Java</span></div>
+                </a>
+
+                <a href="https://celestis.dev/plugins/xantilag" target="_blank" rel="noopener" class="minecraft-card fade-in">
+                    <div class="project-header">
+                        <span class="project-name">XAntiLag</span>
+                        <span class="badge badge-paid">paid</span>
                     </div>
+                    <p class="project-desc">
+                        Stacks items and mobs, caps chunk entities, kills runaway
+                        redstone clocks. Paper and Folia compatible — the TPS
+                        gain is noticeable.
+                    </p>
+                    <div class="mc-stats"><span>Java</span></div>
                 </a>
             </div>
         </div>
@@ -1139,11 +1115,12 @@
 
     <!-- Contact -->
     <section id="contact">
-        <div class="section-label">Contact</div>
-        <h2 class="section-title">Let's connect.</h2>
+        <div class="section-label">contact</div>
+        <h2 class="section-title">Say <em>hi</em>.</h2>
         <p class="contact-desc">
-            Open to interesting projects, collaborations, or just a conversation
-            about tech. DMs are always open.
+            Email is the easiest way to reach me. I read everything that
+            comes in, and reply to most of it — project ideas, questions,
+            or just a chat about something you're working on.
         </p>
         <div class="contact-links">
             <a href="mailto:xyness@icloud.com" class="contact-link">
@@ -1164,7 +1141,7 @@
 
     <!-- Footer -->
     <footer>
-        <span>xyness</span> · built with purpose · 2026
+        <span class="name">Xyness</span> · 2026
     </footer>
 
     <script>
