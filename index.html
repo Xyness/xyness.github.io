@@ -1007,15 +1007,19 @@
                     <span class="project-arrow">-&gt;</span>
                 </div>
                 <p class="project-desc" data-i18n="proj.sentinel">
-                    A streaming pipeline that flags suspicious crypto trading
-                    activity in real time. Kafka pulls the data in, Spark does
-                    the heavy lifting, and unsupervised models decide what's
-                    anomalous. Started as a big-data course project; I kept
-                    polishing it after.
+                    Two streaming pipelines. The first flags suspicious crypto
+                    trading in real time: Kafka carries the trades, Spark rolls
+                    them into z-scores over one-minute windows, an Isolation
+                    Forest decides what looks wrong. The second reads Solana
+                    transactions while they are still propagating, before anyone
+                    knows whether they will land, then reconciles them against
+                    confirmed blocks. That surfaces the transactions that were
+                    broadcast and never included, which no explorer has.
                 </p>
                 <div class="project-tech">
                     <span>Apache Spark</span>
                     <span>Kafka</span>
+                    <span>Rust</span>
                     <span>FastAPI</span>
                     <span>Streamlit</span>
                     <span>Python</span>
@@ -1029,15 +1033,20 @@
                     <span class="project-arrow">-&gt;</span>
                 </div>
                 <p class="project-desc" data-i18n="proj.phantom">
-                    An attack-surface scanner. The hot path is a Rust async
-                    port scanner; Python handles the recon work; FastAPI serves
-                    it; a Next.js dashboard puts it all in front of you.
+                    Point it at a host you are allowed to scan and it maps the
+                    attack surface: open ports and the services behind them, DNS
+                    records and subdomains, TLS and HTTP posture, WHOIS, and the
+                    files people forget on a web root. The port scanner is a
+                    separate Rust binary the API shells out to, so it can be
+                    tested on its own. Findings roll up into a risk score and a
+                    PDF.
                 </p>
                 <div class="project-tech">
                     <span>Rust</span>
                     <span>Python</span>
                     <span>FastAPI</span>
                     <span>Next.js</span>
+                    <span>PostgreSQL</span>
                 </div>
             </a>
 
@@ -1048,16 +1057,19 @@
                     <span class="project-arrow">-&gt;</span>
                 </div>
                 <p class="project-desc" data-i18n="proj.sysaudit">
-                    A security audit script for Linux and macOS. It walks
-                    through config, auth, network, and file integrity, then
-                    drops a self-contained HTML report you can read offline.
-                    I wrote it because I was tired of running the same checks
-                    by hand.
+                    A command line audit of the machine you are sitting at:
+                    kernel and services, listening sockets and firewall,
+                    accounts and SSH keys, file permissions, and installed
+                    packages matched against OSV.dev. Out comes a score over 100
+                    and one HTML file with the CSS and JS inlined, so it opens
+                    offline. A cap per severity stops one noisy check flooring
+                    the score on its own.
                 </p>
                 <div class="project-tech">
                     <span>Python</span>
+                    <span>Typer</span>
                     <span>Jinja</span>
-                    <span>JavaScript</span>
+                    <span>OSV.dev</span>
                 </div>
             </a>
 
@@ -1068,15 +1080,21 @@
                     <span class="project-arrow">-&gt;</span>
                 </div>
                 <p class="project-desc" data-i18n="proj.archer">
-                    Real-time face recognition through a webcam, with a sci-fi
-                    HUD overlay because I thought it'd look good. ArcFace
-                    embeddings via InsightFace handle the actual matching.
+                    Face recognition from a webcam or an RTSP camera. SCRFD
+                    detects, ArcFace matches, and the panel beside each face
+                    carries what the pixels say: apparent age and gender, skin
+                    tone on the Monk scale, distance from the spacing between
+                    the eyes, height if you have measured where the camera sits.
+                    Every face it sees goes into a log with a snapshot, grouped
+                    so one person is one entry, and a camera records a clip with
+                    three seconds of pre-roll whenever somebody turns up.
                 </p>
                 <div class="project-tech">
                     <span>FastAPI</span>
                     <span>InsightFace</span>
                     <span>OpenCV</span>
-                    <span>JavaScript</span>
+                    <span>ONNX</span>
+                    <span>SQLite</span>
                 </div>
             </a>
 
@@ -1090,15 +1108,21 @@
                     <span class="project-arrow">-&gt;</span>
                 </div>
                 <p class="project-desc" data-i18n="proj.gitpulse">
-                    Turns your GitHub history into something nicer to look at:
-                    heatmaps, constellation graphs, a year-end recap you can
-                    share. Live and shipping.
+                    Type in a GitHub username and the profile comes back as
+                    something worth looking at. Repos become stars in a
+                    force-directed constellation, sized by stargazers and pulled
+                    together by shared language, next to a clickable
+                    contribution heatmap, a streamgraph of how someone's
+                    languages shifted year to year, and a Wrapped-style recap
+                    with its own shareable URL. One GraphQL query per profile,
+                    no login anywhere.
                 </p>
                 <div class="project-tech">
                     <span>Next.js</span>
                     <span>TypeScript</span>
                     <span>D3.js</span>
                     <span>Tailwind</span>
+                    <span>GraphQL</span>
                 </div>
             </a>
         </div>
@@ -1110,8 +1134,9 @@
                 <span class="line"></span>
             </div>
             <p class="minecraft-intro" data-i18n="mc.intro">
-                Some open source, some commercial, all running on real servers.
-                It's the corner of programming I keep coming back to.
+                Two claim plugins and a framework with its own addons. Some open
+                source, some paid, all in production on real servers. It is the
+                corner of programming I keep coming back to.
             </p>
             <div class="minecraft-grid">
                 <a href="https://celestis.dev/plugins/simpleclaimsystem" target="_blank" rel="noopener" class="minecraft-card fade-in">
@@ -1120,10 +1145,19 @@
                         <span class="badge badge-open" data-i18n="badge.open">open source</span>
                     </div>
                     <p class="project-desc" data-i18n="mc.scs">
-                        Land claiming for Minecraft servers. Picked up by quite
-                        a few communities along the way.
+                        Chunk-based land protection. Players claim, merge and
+                        sell territory from a set of menus, with more than 30
+                        per-claim settings covering visitors, members and
+                        natural events. Claims show up on Dynmap, BlueMap and
+                        Pl3xMap, Bedrock players get native forms, and there is
+                        a sync and async API for other plugins. 1.18+, Folia
+                        included.
                     </p>
-                    <div class="mc-stats"><span>Java</span></div>
+                    <div class="mc-stats">
+                        <span>Java</span>
+                        <span>Spigot API</span>
+                        <span>Vault</span>
+                    </div>
                 </a>
 
                 <a href="https://celestis.dev/plugins/simpleclaimsystem2" target="_blank" rel="noopener" class="minecraft-card fade-in">
@@ -1132,10 +1166,19 @@
                         <span class="badge badge-paid" data-i18n="badge.paid">paid</span>
                     </div>
                     <p class="project-desc" data-i18n="mc.scs2">
-                        The follow-up to SimpleClaimSystem. Same idea, more
-                        features, sold on celestis.dev.
+                        The rewrite, for servers that outgrew a single
+                        permission list. Four roles per claim plus as many
+                        custom ones as you like, 130+ permissions, 70+
+                        protection flags, temporary invites, claim templates, an
+                        optional rent system and an audit log you can export.
+                        Caffeine in front, Redis optional, SQLite or MySQL
+                        behind.
                     </p>
-                    <div class="mc-stats"><span>Java</span></div>
+                    <div class="mc-stats">
+                        <span>Java</span>
+                        <span>Redis</span>
+                        <span>MySQL</span>
+                    </div>
                 </a>
 
                 <a href="https://github.com/Xyness/XCore" target="_blank" rel="noopener" class="minecraft-card fade-in">
@@ -1144,14 +1187,19 @@
                         <span class="badge badge-open" data-i18n="badge.open">open source</span>
                     </div>
                     <p class="project-desc" data-i18n="mc.xcore">
-                        The framework everything else here sits on. Database
-                        layer, multi-tier caching, cross-server sync. Folia
-                        compatible.
+                        The framework the other X plugins sit on. Three cache
+                        layers (Caffeine, Redis, database), cross-server sync
+                        over Redis Pub/Sub or database polling, an addon loader,
+                        GUIs described in YAML, a multi-currency economy that
+                        registers as the Vault provider, leaderboards,
+                        deliveries for offline players, and a web dashboard with
+                        a REST API.
                     </p>
                     <div class="mc-stats">
                         <span>Java</span>
-                        <span>JavaScript</span>
-                        <span>HTML/CSS</span>
+                        <span>Redis</span>
+                        <span>HikariCP</span>
+                        <span>PostgreSQL</span>
                     </div>
                 </a>
 
@@ -1161,9 +1209,19 @@
                         <span class="badge badge-paid" data-i18n="badge.paid">paid</span>
                     </div>
                     <p class="project-desc" data-i18n="mc.xbans">
-                        Sanctions and AI-assisted moderation that plug into XCore.
+                        Bans, mutes, warns and jails, plus ban waves you build
+                        quietly and drop all at once. A Bayesian chat classifier
+                        trained in five languages reads through obfuscation, and
+                        alt detection weighs eleven signals, from a shared
+                        address down to what sits in someone's options.txt. VPN,
+                        proxy and country blocking on top. The same jar runs on
+                        the proxy.
                     </p>
-                    <div class="mc-stats"><span>Java</span></div>
+                    <div class="mc-stats">
+                        <span>Java</span>
+                        <span>GeoIP</span>
+                        <span>Velocity</span>
+                    </div>
                 </a>
 
                 <a href="https://celestis.dev/plugins/xauctionhouse" target="_blank" rel="noopener" class="minecraft-card fade-in">
@@ -1172,10 +1230,19 @@
                         <span class="badge badge-paid" data-i18n="badge.paid">paid</span>
                     </div>
                     <p class="project-desc" data-i18n="mc.xah">
-                        An auction house for XCore servers: fixed-price listings,
-                        live bidding, multi-currency.
+                        Fixed-price listings and live auctions in any currency
+                        XCore knows about, with snipe protection, tiered bid
+                        increments and automatic settlement. Eleven categories
+                        computed from the item rather than stored, search by
+                        name, price or material, standing alerts and price
+                        history. An expired listing nobody reclaims goes back to
+                        its seller through the mailbox.
                     </p>
-                    <div class="mc-stats"><span>Java</span></div>
+                    <div class="mc-stats">
+                        <span>Java</span>
+                        <span>XCore</span>
+                        <span>Vault</span>
+                    </div>
                 </a>
 
                 <a href="https://celestis.dev/plugins/xlogin" target="_blank" rel="noopener" class="minecraft-card fade-in">
@@ -1184,10 +1251,19 @@
                         <span class="badge badge-paid" data-i18n="badge.paid">paid</span>
                     </div>
                     <p class="project-desc" data-i18n="mc.xlogin">
-                        Login and register flow with 2FA, premium auto-login,
-                        cross-server sessions, and proxy support.
+                        Online mode decided per player: a premium account is
+                        verified against Mojang and connects with its skin and no
+                        password, everyone else registers. TOTP two-factor with
+                        single-use recovery codes, a captcha drawn on a map,
+                        PBKDF2 at 210k iterations, sessions shared across
+                        servers, Bedrock players through Geyser. One jar for
+                        Velocity, BungeeCord and XCore.
                     </p>
-                    <div class="mc-stats"><span>Java</span></div>
+                    <div class="mc-stats">
+                        <span>Java</span>
+                        <span>PBKDF2</span>
+                        <span>TOTP</span>
+                    </div>
                 </a>
 
                 <a href="https://celestis.dev/plugins/xantilag" target="_blank" rel="noopener" class="minecraft-card fade-in">
@@ -1196,11 +1272,18 @@
                         <span class="badge badge-paid" data-i18n="badge.paid">paid</span>
                     </div>
                     <p class="project-desc" data-i18n="mc.xantilag">
-                        Stacks items and mobs, caps chunk entities, kills runaway
-                        redstone clocks. Paper and Folia compatible, and the TPS
-                        gain is noticeable.
+                        Prevention rather than cleanup: a chunk that has hit its
+                        cap will not accept another hopper. Mob and item stackers
+                        that keep loot tables honest, per-chunk limits, redstone
+                        clock detection, TNT rate limiting, and a TPS and MSPT
+                        monitor that walks up through optimisation levels as the
+                        server degrades and unwinds them once it recovers.
                     </p>
-                    <div class="mc-stats"><span>Java</span></div>
+                    <div class="mc-stats">
+                        <span>Java</span>
+                        <span>Paper</span>
+                        <span>Folia</span>
+                    </div>
                 </a>
             </div>
         </div>
@@ -1260,9 +1343,9 @@
 
                 "label.about": "about",
                 "title.about": "A bit about <em>me</em>.",
-                "about.p1": "I'm studying <strong>computer science, big data, and AI</strong>, with math and stats on the side. School covers the theory; the projects on this page are how I actually learn, by building, breaking, and trying again.",
+                "about.p1": "I'm studying <strong>computer science, big data, and AI</strong>, with math and stats on the side. School covers the theory; the projects on this page are where I actually learn, by building, breaking, and trying again.",
                 "about.p2": "I tend to follow projects all the way through, from the first architecture sketch to the boring maintenance afterwards. <strong>Security</strong> gets a lot of my attention, mostly because I run things and have learned the hard way what happens when you don't.",
-                "about.p3": "Minecraft plugins are the side I keep coming back to; there's a small collection of them at the bottom of this page.",
+                "about.p3": "Minecraft plugins are the side I keep coming back to; there's a collection of them at the bottom of this page.",
                 "about.p4": "If you're working on something and want to chat, my inbox is open.",
                 "stat.studying": "studying",
                 "stat.studying.v": "CS, big data, AI, math, stats",
@@ -1290,21 +1373,22 @@
                 "badge.prod": "prod",
                 "badge.open": "open source",
                 "badge.paid": "paid",
-                "proj.sentinel": "A streaming pipeline that flags suspicious crypto trading activity in real time. Kafka pulls the data in, Spark does the heavy lifting, and unsupervised models decide what's anomalous. Started as a big-data course project; I kept polishing it after.",
-                "proj.phantom": "An attack-surface scanner. The hot path is a Rust async port scanner; Python handles the recon work; FastAPI serves it; a Next.js dashboard puts it all in front of you.",
-                "proj.sysaudit": "A security audit script for Linux and macOS. It walks through config, auth, network, and file integrity, then drops a self-contained HTML report you can read offline. I wrote it because I was tired of running the same checks by hand.",
-                "proj.archer": "Real-time face recognition through a webcam, with a sci-fi HUD overlay because I thought it'd look good. ArcFace embeddings via InsightFace handle the actual matching.",
-                "proj.gitpulse": "Turns your GitHub history into something nicer to look at: heatmaps, constellation graphs, a year-end recap you can share. Live and shipping.",
+
+                "proj.sentinel": "Two streaming pipelines. The first flags suspicious crypto trading in real time: Kafka carries the trades, Spark rolls them into z-scores over one-minute windows, an Isolation Forest decides what looks wrong. The second reads Solana transactions while they are still propagating, before anyone knows whether they will land, then reconciles them against confirmed blocks. That surfaces the transactions that were broadcast and never included, which no explorer has.",
+                "proj.phantom": "Point it at a host you are allowed to scan and it maps the attack surface: open ports and the services behind them, DNS records and subdomains, TLS and HTTP posture, WHOIS, and the files people forget on a web root. The port scanner is a separate Rust binary the API shells out to, so it can be tested on its own. Findings roll up into a risk score and a PDF.",
+                "proj.sysaudit": "A command line audit of the machine you are sitting at: kernel and services, listening sockets and firewall, accounts and SSH keys, file permissions, and installed packages matched against OSV.dev. Out comes a score over 100 and one HTML file with the CSS and JS inlined, so it opens offline. A cap per severity stops one noisy check flooring the score on its own.",
+                "proj.archer": "Face recognition from a webcam or an RTSP camera. SCRFD detects, ArcFace matches, and the panel beside each face carries what the pixels say: apparent age and gender, skin tone on the Monk scale, distance from the spacing between the eyes, height if you have measured where the camera sits. Every face it sees goes into a log with a snapshot, grouped so one person is one entry, and a camera records a clip with three seconds of pre-roll whenever somebody turns up.",
+                "proj.gitpulse": "Type in a GitHub username and the profile comes back as something worth looking at. Repos become stars in a force-directed constellation, sized by stargazers and pulled together by shared language, next to a clickable contribution heatmap, a streamgraph of how someone's languages shifted year to year, and a Wrapped-style recap with its own shareable URL. One GraphQL query per profile, no login anywhere.",
 
                 "mc.title": "Minecraft plugins",
-                "mc.intro": "Some open source, some commercial, all running on real servers. It's the corner of programming I keep coming back to.",
-                "mc.scs": "Land claiming for Minecraft servers. Picked up by quite a few communities along the way.",
-                "mc.scs2": "The follow-up to SimpleClaimSystem. Same idea, more features, sold on celestis.dev.",
-                "mc.xcore": "The framework everything else here sits on. Database layer, multi-tier caching, cross-server sync. Folia compatible.",
-                "mc.xbans": "Sanctions and AI-assisted moderation that plug into XCore.",
-                "mc.xah": "An auction house for XCore servers: fixed-price listings, live bidding, multi-currency.",
-                "mc.xlogin": "Login and register flow with 2FA, premium auto-login, cross-server sessions, and proxy support.",
-                "mc.xantilag": "Stacks items and mobs, caps chunk entities, kills runaway redstone clocks. Paper and Folia compatible, and the TPS gain is noticeable.",
+                "mc.intro": "Two claim plugins and a framework with its own addons. Some open source, some paid, all in production on real servers. It is the corner of programming I keep coming back to.",
+                "mc.scs": "Chunk-based land protection. Players claim, merge and sell territory from a set of menus, with more than 30 per-claim settings covering visitors, members and natural events. Claims show up on Dynmap, BlueMap and Pl3xMap, Bedrock players get native forms, and there is a sync and async API for other plugins. 1.18+, Folia included.",
+                "mc.scs2": "The rewrite, for servers that outgrew a single permission list. Four roles per claim plus as many custom ones as you like, 130+ permissions, 70+ protection flags, temporary invites, claim templates, an optional rent system and an audit log you can export. Caffeine in front, Redis optional, SQLite or MySQL behind.",
+                "mc.xcore": "The framework the other X plugins sit on. Three cache layers (Caffeine, Redis, database), cross-server sync over Redis Pub/Sub or database polling, an addon loader, GUIs described in YAML, a multi-currency economy that registers as the Vault provider, leaderboards, deliveries for offline players, and a web dashboard with a REST API.",
+                "mc.xbans": "Bans, mutes, warns and jails, plus ban waves you build quietly and drop all at once. A Bayesian chat classifier trained in five languages reads through obfuscation, and alt detection weighs eleven signals, from a shared address down to what sits in someone's options.txt. VPN, proxy and country blocking on top. The same jar runs on the proxy.",
+                "mc.xah": "Fixed-price listings and live auctions in any currency XCore knows about, with snipe protection, tiered bid increments and automatic settlement. Eleven categories computed from the item rather than stored, search by name, price or material, standing alerts and price history. An expired listing nobody reclaims goes back to its seller through the mailbox.",
+                "mc.xlogin": "Online mode decided per player: a premium account is verified against Mojang and connects with its skin and no password, everyone else registers. TOTP two-factor with single-use recovery codes, a captcha drawn on a map, PBKDF2 at 210k iterations, sessions shared across servers, Bedrock players through Geyser. One jar for Velocity, BungeeCord and XCore.",
+                "mc.xantilag": "Prevention rather than cleanup: a chunk that has hit its cap will not accept another hopper. Mob and item stackers that keep loot tables honest, per-chunk limits, redstone clock detection, TNT rate limiting, and a TPS and MSPT monitor that walks up through optimisation levels as the server degrades and unwinds them once it recovers.",
 
                 "label.contact": "contact",
                 "title.contact": "Say <em>hi</em>.",
@@ -1312,72 +1396,73 @@
             },
             fr: {
                 "meta.title": "Xyness | Portfolio",
-                "meta.desc": "Xyness, etudiant en informatique, big data et IA. Je construis des logiciels, en general parce que je voulais que la chose existe.",
+                "meta.desc": "Xyness, étudiant en informatique, big data et IA. Je développe, en général parce que je voulais que la chose existe.",
                 "aria.lang": "Langue",
-                "aria.theme": "Changer de theme",
+                "aria.theme": "Changer de thème",
                 "aria.menu": "Ouvrir le menu",
 
-                "nav.about": "\u00e0 propos",
-                "nav.skills": "comp\u00e9tences",
+                "nav.about": "à propos",
+                "nav.skills": "compétences",
                 "nav.projects": "projets",
                 "nav.contact": "contact",
 
                 "hero.greeting": "Salut, moi c'est",
-                "hero.bio": "Je suis \u00e9tudiant en informatique, big data et IA. La plupart de ce que je construis est parti d'une envie que la chose existe : un outil pour un serveur que je g\u00e8re, un script pour \u00e9viter une corv\u00e9e qui me fatiguait, un projet \u00e0 c\u00f4t\u00e9 pour apprendre quelque chose que je ne savais pas encore.",
-                "hero.cta1": "Voir ce que j'ai fait",
+                "hero.bio": "Je suis étudiant en informatique, big data et IA. La plupart de mes projets sont partis d'une envie simple : que la chose existe. Un outil pour un serveur que je gère, un script pour m'épargner une corvée, un projet à côté pour apprendre quelque chose que je ne connaissais pas.",
+                "hero.cta1": "Voir mes projets",
                 "hero.cta2": "Me contacter",
 
-                "label.about": "\u00e0 propos",
-                "title.about": "Un peu \u00e0 <em>propos</em>.",
-                "about.p1": "J'\u00e9tudie l'<strong>informatique, le big data et l'IA</strong>, avec des maths et des stats \u00e0 c\u00f4t\u00e9. L'\u00e9cole couvre la th\u00e9orie ; les projets de cette page sont la fa\u00e7on dont j'apprends vraiment, en construisant, en cassant, et en recommen\u00e7ant.",
-                "about.p2": "J'ai tendance \u00e0 mener les projets jusqu'au bout, du premier sch\u00e9ma d'architecture \u00e0 la maintenance ennuyeuse qui suit. La <strong>s\u00e9curit\u00e9</strong> occupe une bonne partie de mon attention, surtout parce que j'h\u00e9berge des choses et que j'ai appris \u00e0 mes d\u00e9pens ce qui arrive quand on s'en passe.",
-                "about.p3": "Les plugins Minecraft sont le coin auquel je reviens toujours ; il y en a une petite collection en bas de cette page.",
-                "about.p4": "Si vous bossez sur quelque chose et que vous voulez en parler, ma bo\u00eete mail est ouverte.",
-                "stat.studying": "\u00e9tudes",
+                "label.about": "à propos",
+                "title.about": "Deux mots sur <em>moi</em>.",
+                "about.p1": "J'étudie l'<strong>informatique, le big data et l'IA</strong>, avec des maths et des stats à côté. L'école couvre la théorie, les projets de cette page sont là où j'apprends vraiment : en construisant, en cassant, et en recommençant.",
+                "about.p2": "J'ai tendance à mener les projets jusqu'au bout, du premier schéma d'architecture à la maintenance ennuyeuse qui suit. La <strong>sécurité</strong> occupe une bonne partie de mon attention, surtout parce que j'héberge des choses et que j'ai appris à mes dépens ce qui arrive quand on la néglige.",
+                "about.p3": "Les plugins Minecraft, c'est le coin où je reviens toujours. Il y en a une collection en bas de cette page.",
+                "about.p4": "Si vous travaillez sur quelque chose et que vous voulez en parler, ma boîte mail est ouverte.",
+                "stat.studying": "études",
                 "stat.studying.v": "Info, big data, IA, maths, stats",
                 "stat.languages": "langues",
-                "stat.languages.v": "Fran\u00e7ais, anglais, espagnol",
-                "stat.interests": "int\u00e9r\u00eats",
-                "stat.interests.v": "Full-stack, data, s\u00e9curit\u00e9",
+                "stat.languages.v": "Français, anglais, espagnol",
+                "stat.interests": "centres d'intérêt",
+                "stat.interests.v": "Full-stack, data, sécurité",
 
-                "label.skills": "comp\u00e9tences",
-                "title.skills": "Ce avec quoi je <em>travaille</em>.",
+                "label.skills": "compétences",
+                "title.skills": "Ce que j'<em>utilise</em>.",
                 "skills.languages": "Langages",
                 "skills.backend": "Backend",
                 "skills.infra": "Infrastructure",
                 "skills.data": "Data & IA",
-                "skills.security": "S\u00e9curit\u00e9",
+                "skills.security": "Sécurité",
                 "tag.rest": "API REST",
                 "tag.stats": "Statistiques",
-                "tag.appsec": "S\u00e9curit\u00e9 applicative",
+                "tag.appsec": "Sécurité applicative",
                 "tag.audit": "Audit de serveurs",
                 "tag.threat": "Analyse de menaces",
 
                 "label.projects": "projets",
                 "title.projects": "Ce que j'ai <em>construit</em>.",
-                "badge.featured": "en avant",
-                "badge.prod": "prod",
+                "badge.featured": "à la une",
+                "badge.prod": "en prod",
                 "badge.open": "open source",
                 "badge.paid": "payant",
-                "proj.sentinel": "Un pipeline en streaming qui rep\u00e8re les activit\u00e9s de trading crypto suspectes en temps r\u00e9el. Kafka fait entrer les donn\u00e9es, Spark fait le gros du travail, et des mod\u00e8les non supervis\u00e9s d\u00e9cident de ce qui est anormal. Parti d'un projet de cours en big data, que j'ai continu\u00e9 \u00e0 peaufiner ensuite.",
-                "proj.phantom": "Un scanner de surface d'attaque. Le chemin critique est un scanner de ports async en Rust, Python s'occupe de la reconnaissance, FastAPI orchestre, et un dashboard Next.js met tout \u00e7a devant vous.",
-                "proj.sysaudit": "Un script d'audit de s\u00e9curit\u00e9 pour Linux et macOS. Il passe en revue la configuration, l'authentification, le r\u00e9seau et l'int\u00e9grit\u00e9 des fichiers, puis sort un rapport HTML autonome, lisible hors ligne. \u00c9crit parce que j'en avais marre de refaire les m\u00eames v\u00e9rifications \u00e0 la main.",
-                "proj.archer": "Reconnaissance faciale en temps r\u00e9el via webcam, avec un HUD un peu science-fiction parce que je trouvais que \u00e7a rendait bien. Les embeddings ArcFace d'InsightFace font le vrai travail.",
-                "proj.gitpulse": "Transforme votre historique GitHub en quelque chose de plus agr\u00e9able \u00e0 regarder : heatmaps, graphes en constellation, un r\u00e9cap de fin d'ann\u00e9e \u00e0 partager. En ligne et en service.",
+
+                "proj.sentinel": "Deux pipelines de streaming. Le premier repère en temps réel les mouvements suspects sur les marchés crypto : Kafka transporte les trades, Spark les agrège en z-scores sur des fenêtres d'une minute, un Isolation Forest décide de ce qui cloche. Le second lit les transactions Solana pendant leur propagation, avant que quiconque sache si elles vont passer, puis les rapproche des blocs confirmés. On récupère ainsi les transactions diffusées qui n'ont jamais été incluses, que plus aucun explorateur ne peut montrer.",
+                "proj.phantom": "Pointez-le sur une machine que vous avez le droit de scanner et il cartographie la surface d'attaque : ports ouverts et services derrière, enregistrements DNS et sous-domaines, configuration TLS et HTTP, WHOIS, et les fichiers qu'on oublie à la racine d'un site. Le scanner de ports est un binaire Rust séparé que l'API appelle, ce qui permet de le tester tout seul. Le tout ressort en score de risque et en PDF.",
+                "proj.sysaudit": "Un audit en ligne de commande de la machine devant vous : noyau et services, ports en écoute et pare-feu, comptes et clés SSH, permissions de fichiers, et paquets installés confrontés à OSV.dev. En sortie, une note sur 100 et un seul fichier HTML avec le CSS et le JS embarqués, donc lisible hors ligne. Un plafond par niveau de gravité évite qu'une seule vérification bavarde ne mette la note à zéro.",
+                "proj.archer": "Reconnaissance faciale depuis une webcam ou une caméra RTSP. SCRFD détecte, ArcFace identifie, et le panneau à côté de chaque visage affiche ce que disent les pixels : âge et genre apparents, teinte de peau sur l'échelle Monk, distance déduite de l'écart entre les yeux, taille si vous avez mesuré où se trouve la caméra. Chaque visage aperçu part dans un journal avec une capture, regroupé pour qu'une personne soit une seule entrée, et les caméras enregistrent un clip avec trois secondes d'avance dès que quelqu'un se présente.",
+                "proj.gitpulse": "Tapez un pseudo GitHub et le profil revient sous une forme agréable à regarder. Les dépôts deviennent des étoiles dans une constellation à simulation de forces, dimensionnées par les stars et rapprochées par langage commun, à côté d'une heatmap de contributions cliquable, d'un streamgraph de l'évolution des langages année après année, et d'un récap façon Wrapped avec sa propre URL à partager. Une seule requête GraphQL par profil, aucune connexion nulle part.",
 
                 "mc.title": "Plugins Minecraft",
-                "mc.intro": "Certains open source, d'autres commerciaux, tous en train de tourner sur de vrais serveurs. C'est le coin de la programmation auquel je reviens toujours.",
-                "mc.scs": "Protection de terrains pour serveurs Minecraft. Repris par pas mal de communaut\u00e9s au fil du temps.",
-                "mc.scs2": "La suite de SimpleClaimSystem. M\u00eame id\u00e9e, plus de fonctionnalit\u00e9s, vendu sur celestis.dev.",
-                "mc.xcore": "Le framework sur lequel repose tout le reste. Couche base de donn\u00e9es, cache multi-niveaux, synchronisation inter-serveurs. Compatible Folia.",
-                "mc.xbans": "Sanctions et mod\u00e9ration assist\u00e9e par IA, branch\u00e9es sur XCore.",
-                "mc.xah": "Un h\u00f4tel des ventes pour serveurs XCore : ventes \u00e0 prix fixe, ench\u00e8res en direct, multi-devises.",
-                "mc.xlogin": "Connexion et inscription avec 2FA, auto-login premium, sessions inter-serveurs et support des proxys.",
-                "mc.xantilag": "Empile les items et les mobs, limite les entit\u00e9s par chunk, coupe les horloges redstone qui s'emballent. Compatible Paper et Folia, et le gain de TPS se voit.",
+                "mc.intro": "Deux plugins de protection de terrain et un framework avec ses propres addons. Certains open source, d'autres payants, tous en production sur de vrais serveurs. C'est le coin de la programmation où je reviens toujours.",
+                "mc.scs": "Protection de terrain par chunk. Les joueurs revendiquent, fusionnent et revendent leurs territoires depuis des menus, avec plus de 30 réglages par claim pour les visiteurs, les membres et les événements naturels. Les claims apparaissent sur Dynmap, BlueMap et Pl3xMap, les joueurs Bedrock ont des formulaires natifs, et une API sync et async est disponible pour les autres plugins. 1.18+, Folia compris.",
+                "mc.scs2": "La réécriture, pour les serveurs qui ont dépassé le stade d'une seule liste de permissions. Quatre rôles par claim plus autant de rôles personnalisés qu'on veut, plus de 130 permissions, plus de 70 flags de protection, invitations temporaires, modèles de claim, système de loyer optionnel et journal d'audit exportable. Caffeine devant, Redis en option, SQLite ou MySQL derrière.",
+                "mc.xcore": "Le framework sur lequel reposent les autres plugins X. Trois niveaux de cache (Caffeine, Redis, base de données), synchronisation inter-serveurs via Redis Pub/Sub ou interrogation de la base, chargeur d'addons, menus décrits en YAML, économie multi-devises enregistrée comme fournisseur Vault, classements, livraisons pour les joueurs hors ligne, et un dashboard web avec API REST.",
+                "mc.xbans": "Bans, mutes, avertissements et prisons, plus des vagues de bannissement qu'on prépare tranquillement et qu'on applique d'un coup. Un classifieur bayésien de chat entraîné en cinq langues lit à travers l'obfuscation, et la détection de comptes multiples pèse onze signaux, de l'adresse partagée jusqu'au contenu du options.txt. Blocage VPN, proxy et pays par-dessus. Le même jar tourne sur le proxy.",
+                "mc.xah": "Ventes à prix fixe et enchères en direct dans n'importe quelle devise connue de XCore, avec protection anti-snipe, paliers d'enchère et règlement automatique. Onze catégories calculées depuis l'objet plutôt que stockées, recherche par nom, prix ou matériau, alertes permanentes et historique des prix. Une vente expirée que personne ne récupère repart chez son vendeur via la boîte aux lettres.",
+                "mc.xlogin": "Le mode online se décide joueur par joueur : un compte premium est vérifié auprès de Mojang et se connecte avec son skin et sans mot de passe, les autres s'enregistrent. Double authentification TOTP avec codes de secours à usage unique, captcha dessiné sur une carte, PBKDF2 à 210 000 itérations, sessions partagées entre serveurs, joueurs Bedrock via Geyser. Un seul jar pour Velocity, BungeeCord et XCore.",
+                "mc.xantilag": "De la prévention plutôt que du nettoyage : un chunk qui a atteint sa limite n'accepte pas un hopper de plus. Stackers de mobs et d'items qui gardent les tables de butin justes, limites par chunk, détection des horloges redstone, limitation du TNT, et un moniteur TPS et MSPT qui monte les niveaux d'optimisation quand le serveur s'essouffle et les redescend une fois qu'il récupère.",
 
                 "label.contact": "contact",
                 "title.contact": "Dites <em>bonjour</em>.",
-                "contact.desc": "Le mail est le plus simple pour me joindre. Je lis tout ce qui arrive et je r\u00e9ponds \u00e0 la plupart : id\u00e9es de projet, questions, ou juste discuter de ce sur quoi vous travaillez."
+                "contact.desc": "Le mail est le plus simple pour me joindre. Je lis tout ce qui arrive et je réponds à la plupart : idées de projet, questions, ou juste discuter de ce sur quoi vous travaillez."
             }
         };
 
