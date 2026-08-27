@@ -561,11 +561,6 @@
             border-radius: 4px;
         }
 
-        .badge-featured {
-            color: var(--accent);
-            background: var(--accent-soft);
-        }
-
         .badge-prod {
             color: var(--coral);
             background: var(--coral-soft);
@@ -604,10 +599,6 @@
             color: var(--text-secondary);
             border: 1px solid var(--border);
             letter-spacing: 0.2px;
-        }
-
-        .project-card.featured {
-            grid-column: span 2;
         }
 
         /* Minecraft section */
@@ -779,7 +770,6 @@
             nav.scrolled { padding: 12px 22px; }
             .about-content { grid-template-columns: 1fr; gap: 36px; }
             .projects-grid { grid-template-columns: 1fr; }
-            .project-card.featured { grid-column: span 1; }
             .minecraft-grid { grid-template-columns: 1fr; }
             #hero { padding-top: 90px; }
             .section-title { margin-bottom: 44px; }
@@ -997,38 +987,8 @@
         <h2 class="section-title" data-i18n-html="title.projects">Things I've <em>built</em>.</h2>
 
         <div class="projects-grid">
-            <!-- Preflight -->
-            <a href="https://github.com/Xyness/Preflight" target="_blank" rel="noopener" class="project-card featured fade-in">
-                <div class="project-badges">
-                    <span class="badge badge-featured" data-i18n="badge.featured">featured</span>
-                </div>
-                <div class="project-header">
-                    <span class="project-name">Preflight</span>
-                    <span class="project-arrow">-&gt;</span>
-                </div>
-                <p class="project-desc" data-i18n="proj.preflight">
-                    Everything that reads Solana reads confirmed blocks, so it
-                    tells you what happened about a second after it did. This
-                    reads the shreds a leader is still propagating, decodes the
-                    swaps inside them and reconciles them against the chain
-                    afterwards. You see a swap before any RPC will admit it
-                    exists, including the ones that are about to revert, and the
-                    ones the chain never confirms at all, which are in no
-                    dataset anywhere. Every row carries how completely its slot
-                    was seen, because absence you cannot measure is not
-                    evidence.
-                </p>
-                <div class="project-tech">
-                    <span>Rust</span>
-                    <span>Python</span>
-                    <span>Kafka</span>
-                    <span>FastAPI</span>
-                    <span>Streamlit</span>
-                </div>
-            </a>
-
             <!-- Sentinel -->
-            <a href="https://github.com/Xyness/Sentinel" target="_blank" rel="noopener" class="project-card featured fade-in">
+            <a href="https://github.com/Xyness/Sentinel" target="_blank" rel="noopener" class="project-card fade-in">
                 <div class="project-header">
                     <span class="project-name">Sentinel</span>
                     <span class="project-arrow">-&gt;</span>
@@ -1037,10 +997,10 @@
                     Streaming anomaly detection on crypto markets. Kafka carries
                     the trades, Spark turns them into rolling z-scores over
                     one-minute windows, an Isolation Forest decides what looks
-                    wrong, and a dashboard shows you what it flagged. It runs
-                    either on a simulator with anomalies injected on purpose,
-                    which is the only way to know whether the detector is any
-                    good, or on live Binance trades.
+                    wrong, and a terminal client shows you what it flagged. It
+                    runs either on a simulator with anomalies injected on
+                    purpose, which is the only way to know whether the detector
+                    is any good, or on live Binance trades.
                 </p>
                 <div class="project-tech">
                     <span>Apache Spark</span>
@@ -1094,30 +1054,6 @@
                     <span>Typer</span>
                     <span>Jinja</span>
                     <span>OSV.dev</span>
-                </div>
-            </a>
-
-            <!-- Archer -->
-            <a href="https://github.com/Xyness/Archer" target="_blank" rel="noopener" class="project-card fade-in">
-                <div class="project-header">
-                    <span class="project-name">Archer</span>
-                    <span class="project-arrow">-&gt;</span>
-                </div>
-                <p class="project-desc" data-i18n="proj.archer">
-                    Face recognition in the browser. The webcam stays in the
-                    page, SCRFD detects, ArcFace matches, and each face comes
-                    back with what the pixels say: apparent age and gender, skin
-                    tone on the Monk scale, range from the spacing between the
-                    eyes, height once you have told it where the camera sits.
-                    Every face it sees goes into a log with its best frame, and
-                    RTSP cameras record a clip when somebody turns up.
-                </p>
-                <div class="project-tech">
-                    <span>FastAPI</span>
-                    <span>InsightFace</span>
-                    <span>OpenCV</span>
-                    <span>ONNX</span>
-                    <span>SQLite</span>
                 </div>
             </a>
 
@@ -1391,16 +1327,13 @@
 
                 "label.projects": "projects",
                 "title.projects": "Things I've <em>built</em>.",
-                "badge.featured": "featured",
                 "badge.prod": "prod",
                 "badge.open": "open source",
                 "badge.paid": "paid",
 
-                "proj.preflight": "Everything that reads Solana reads confirmed blocks, so it tells you what happened about a second after it did. This reads the shreds a leader is still propagating, decodes the swaps inside them and reconciles them against the chain afterwards. You see a swap before any RPC will admit it exists, including the ones that are about to revert, and the ones the chain never confirms at all, which are in no dataset anywhere. Every row carries how completely its slot was seen, because absence you cannot measure is not evidence.",
-                "proj.sentinel": "Streaming anomaly detection on crypto markets. Kafka carries the trades, Spark turns them into rolling z-scores over one-minute windows, an Isolation Forest decides what looks wrong, and a dashboard shows you what it flagged. It runs either on a simulator with anomalies injected on purpose, which is the only way to know whether the detector is any good, or on live Binance trades.",
+                "proj.sentinel": "Streaming anomaly detection on crypto markets. Kafka carries the trades, Spark turns them into rolling z-scores over one-minute windows, an Isolation Forest decides what looks wrong, and a terminal client shows you what it flagged. It runs either on a simulator with anomalies injected on purpose, which is the only way to know whether the detector is any good, or on live Binance trades.",
                 "proj.phantom": "Point it at a host you are allowed to scan and it maps the attack surface: open ports and the services behind them, DNS records and subdomains, TLS and HTTP posture, WHOIS, and the files people forget on a web root. The port scanner is a separate Rust binary, so it can be tested on its own. No server and no account, just a SQLite file you can list, diff and export from.",
                 "proj.sysaudit": "A command line audit of the machine you are sitting at, on Linux, macOS or Windows: kernel and services, listening sockets and firewall, accounts and SSH keys, file permissions, and installed packages matched against OSV.dev. Out comes a score over 100 and one HTML file with everything inlined, so it opens offline, each finding carrying the commands that fix it.",
-                "proj.archer": "Face recognition in the browser. The webcam stays in the page, SCRFD detects, ArcFace matches, and each face comes back with what the pixels say: apparent age and gender, skin tone on the Monk scale, range from the spacing between the eyes, height once you have told it where the camera sits. Every face it sees goes into a log with its best frame, and RTSP cameras record a clip when somebody turns up.",
                 "proj.gitpulse": "Type in a GitHub username and the profile comes back as something worth looking at. Repos become stars in a force-directed constellation, sized by stargazers and pulled together by shared language, next to a clickable contribution heatmap, a streamgraph of how someone's languages shifted year to year, and a Wrapped-style recap with its own shareable URL. No login anywhere.",
 
                 "mc.title": "Minecraft plugins",
@@ -1462,16 +1395,13 @@
 
                 "label.projects": "projets",
                 "title.projects": "Ce que j'ai <em>construit</em>.",
-                "badge.featured": "à la une",
                 "badge.prod": "en prod",
                 "badge.open": "open source",
                 "badge.paid": "payant",
 
-                "proj.preflight": "Tout ce qui lit Solana lit des blocs confirmés, donc vous apprenez ce qui s'est passé environ une seconde après. Ici on lit les shreds qu'un leader est encore en train de propager, on décode les swaps qu'ils contiennent et on les rapproche ensuite de la chaîne. On voit un swap avant que le moindre RPC admette son existence, y compris ceux qui vont échouer, et ceux que la chaîne ne confirme jamais, qui n'apparaissent dans aucun jeu de données. Chaque ligne porte la couverture de son slot, parce qu'une absence qu'on ne sait pas mesurer ne prouve rien.",
-                "proj.sentinel": "Détection d'anomalies en streaming sur les marchés crypto. Kafka transporte les trades, Spark les transforme en z-scores glissants sur des fenêtres d'une minute, un Isolation Forest décide de ce qui cloche, et un dashboard affiche ce qui a été signalé. Ça tourne soit sur un simulateur avec des anomalies injectées exprès, seule façon de savoir si le détecteur vaut quelque chose, soit sur les trades Binance en direct.",
+                "proj.sentinel": "Détection d'anomalies en streaming sur les marchés crypto. Kafka transporte les trades, Spark les transforme en z-scores glissants sur des fenêtres d'une minute, un Isolation Forest décide de ce qui cloche, et un client en terminal affiche ce qui a été signalé. Ça tourne soit sur un simulateur avec des anomalies injectées exprès, seule façon de savoir si le détecteur vaut quelque chose, soit sur les trades Binance en direct.",
                 "proj.phantom": "Pointez-le sur une machine que vous avez le droit de scanner et il cartographie la surface d'attaque : ports ouverts et services derrière, enregistrements DNS et sous-domaines, configuration TLS et HTTP, WHOIS, et les fichiers qu'on oublie à la racine d'un site. Le scanner de ports est un binaire Rust séparé, donc testable tout seul. Pas de serveur ni de compte, juste un fichier SQLite qu'on peut lister, comparer et exporter.",
                 "proj.sysaudit": "Un audit en ligne de commande de la machine devant vous, sous Linux, macOS ou Windows : noyau et services, ports en écoute et pare-feu, comptes et clés SSH, permissions de fichiers, et paquets installés confrontés à OSV.dev. En sortie, une note sur 100 et un seul fichier HTML avec tout embarqué, donc lisible hors ligne, chaque problème accompagné des commandes qui le corrigent.",
-                "proj.archer": "Reconnaissance faciale dans le navigateur. La webcam reste dans la page, SCRFD détecte, ArcFace identifie, et chaque visage revient avec ce que disent les pixels : âge et genre apparents, teinte de peau sur l'échelle Monk, distance déduite de l'écart entre les yeux, taille une fois que vous avez indiqué où se trouve la caméra. Chaque visage aperçu part dans un journal avec sa meilleure image, et les caméras RTSP enregistrent un clip dès que quelqu'un se présente.",
                 "proj.gitpulse": "Tapez un pseudo GitHub et le profil revient sous une forme agréable à regarder. Les dépôts deviennent des étoiles dans une constellation à simulation de forces, dimensionnées par les stars et rapprochées par langage commun, à côté d'une heatmap de contributions cliquable, d'un streamgraph de l'évolution des langages année après année, et d'un récap façon Wrapped avec sa propre URL à partager. Aucune connexion nulle part.",
 
                 "mc.title": "Plugins Minecraft",
