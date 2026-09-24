@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Xyness | Portfolio</title>
+    <meta name="description" content="Xyness, student in computer science, big data and AI. Tools, plugins and side projects, built because I wanted them to exist.">
+    <meta name="theme-color" content="#0c0e14">
+    <link rel="canonical" href="https://xyness.github.io/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Xyness | Portfolio">
+    <meta property="og:description" content="Student in computer science, big data and AI. Tools, plugins and side projects, built because I wanted them to exist.">
+    <meta property="og:url" content="https://xyness.github.io/">
+    <meta property="og:image" content="https://xyness.github.io/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Xyness: I build the things I wanted to exist.">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="favicon.ico" sizes="32x32">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="preload" href="fonts/space-grotesk.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+    <script>
+        (function () {
+            var root = document.documentElement;
+            var params = new URLSearchParams(location.search);
+            function pick(key) {
+                var value = params.get(key);
+                if (value) return value;
+                try { return localStorage.getItem('xyness.' + key); } catch (e) { return null; }
+            }
+            root.classList.add('js');
+            root.setAttribute('data-theme', pick('theme') === 'light' ? 'light' : 'dark');
+            if (pick('lang') === 'fr') {
+                root.lang = 'fr';
+                root.classList.add('is-translating');
+                setTimeout(function () { root.classList.remove('is-translating'); }, 1500);
+            }
+        })();
+    </script>
+    <style>
+        @font-face {
+            font-family: 'Inter';
+            src: url(fonts/inter.woff2) format('woff2');
+            font-weight: 100 900;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Space Grotesk';
+            src: url(fonts/space-grotesk.woff2) format('woff2');
+            font-weight: 300 700;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'JetBrains Mono';
+            src: url(fonts/jetbrains-mono.woff2) format('woff2');
+            font-weight: 400 800;
+            font-display: swap;
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0c0e14;
+            --bg-elev: #10131b;
+            --surface: rgba(228, 231, 242, 0.03);
+            --surface-hover: rgba(228, 231, 242, 0.055);
+            --line: rgba(228, 231, 242, 0.09);
+            --line-strong: rgba(228, 231, 242, 0.2);
+            --text: #e3e5ec;
+            --text-2: #9296a5;
+            --text-3: #7b7f8d;
+            --accent: #7e8de0;
+            --accent-strong: #9aa7ed;
+            --accent-soft: rgba(126, 141, 224, 0.14);
+            --teal: #5fb6a8;
+            --teal-soft: rgba(95, 182, 168, 0.12);
+            --amber: #d7a45a;
+            --amber-soft: rgba(215, 164, 90, 0.12);
+            --glow: rgba(126, 141, 224, 0.08);
+            --grid: rgba(228, 231, 242, 0.07);
+            --nav-bg: rgba(12, 14, 20, 0.72);
+            --font-display: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+            --ease: cubic-bezier(0.2, 0, 0, 1);
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+            --dur-fast: 180ms;
+            --dur: 280ms;
+            --radius: 12px;
+            --radius-sm: 8px;
+            --max: 1000px;
+            --gutter: 40px;
+            color-scheme: dark;
+        }
+
+        :root[data-theme="light"] {
+            --bg: #f9f9fb;
+            --bg-elev: #ffffff;
+            --surface: rgba(20, 24, 40, 0.03);
+            --surface-hover: rgba(20, 24, 40, 0.055);
+            --line: rgba(20, 24, 40, 0.1);
+            --line-strong: rgba(20, 24, 40, 0.22);
+            --text: #171a24;
+            --text-2: #565b6b;
+            --text-3: #6b6f7d;
+            --accent: #4f5dc2;
+            --accent-strong: #3e4bb0;
+            --accent-soft: rgba(79, 93, 194, 0.11);
+            --teal: #1f6f61;
+            --teal-soft: rgba(31, 111, 97, 0.11);
+            --amber: #875a07;
+            --amber-soft: rgba(135, 90, 7, 0.11);
+            --glow: rgba(79, 93, 194, 0.1);
+            --grid: rgba(20, 24, 40, 0.09);
+            --nav-bg: rgba(249, 249, 251, 0.75);
+            color-scheme: light;
+        }
+
+        html {
+            font-size: clamp(1rem, 0.9rem + 0.12vw, 1.1rem);
+            scroll-behavior: smooth;
+            scroll-padding-top: 88px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--line-strong) transparent;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background:
+                radial-gradient(ellipse 90% 50% at 50% -10%, var(--glow), transparent 60%),
+                var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        .is-translating body > * { visibility: hidden; }
+
+        ::selection {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        a { color: inherit; }
+        svg { display: block; }
+
+        :focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
+        ::view-transition-old(root),
+        ::view-transition-new(root) {
+            animation-duration: 350ms;
+            animation-timing-function: var(--ease);
+        }
+
+        @keyframes rise {
+            from { opacity: 0; transform: translateY(14px); }
+            to   { opacity: 1; transform: none; }
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--max);
+            margin: 0 auto;
+            padding-left: max(var(--gutter), env(safe-area-inset-left));
+            padding-right: max(var(--gutter), env(safe-area-inset-right));
+        }
+
+        .skip-link {
+            position: fixed;
+            top: 12px;
+            left: 12px;
+            z-index: 200;
+            padding: 10px 14px;
+            font-size: 0.875rem;
+            color: var(--text);
+            background: var(--bg-elev);
+            border: 1px solid var(--line-strong);
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            transform: translateY(-160%);
+            transition: transform var(--dur) var(--ease);
+        }
+
+        .skip-link:focus { transform: none; }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 20px max(var(--gutter), env(safe-area-inset-right)) 20px max(var(--gutter), env(safe-area-inset-left));
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px) saturate(140%);
+            -webkit-backdrop-filter: blur(12px) saturate(140%);
+            border-bottom: 1px solid transparent;
+            transition: padding var(--dur) var(--ease), border-color var(--dur) var(--ease);
+        }
+
+        .nav.is-scrolled {
+            padding-block: 12px;
+            border-bottom-color: var(--line);
+        }
+
+        .nav-logo {
+            font-family: var(--font-display);
+            font-size: 1.0625rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            text-decoration: none;
+            color: var(--text);
+            transition: color var(--dur-fast) var(--ease);
+        }
+
+        .nav-logo .dot { color: var(--accent); }
+        .nav-logo:hover { color: var(--accent); }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2px;
+        }
+
+        .nav-links a {
+            position: relative;
+            font-size: 0.875rem;
+            color: var(--text-2);
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 1px;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--accent);
+            transform: translateX(-50%) scale(0);
+            transition: transform var(--dur) var(--ease-out);
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+            background: var(--surface-hover);
+        }
+
+        .nav-links a.is-active { color: var(--text); }
+        .nav-links a.is-active::after { transform: translateX(-50%) scale(1); }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .lang-switch {
+            display: flex;
+            height: 36px;
+            border: 1px solid var(--line);
+            border-radius: 7px;
+            overflow: hidden;
+        }
+
+        .lang-btn {
+            font-family: var(--font-mono);
+            font-size: 0.6875rem;
+            letter-spacing: 0.05em;
+            padding: 0 10px;
+            background: none;
+            border: 0;
+            color: var(--text-3);
+            cursor: pointer;
+            transition: color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+        }
+
+        .lang-btn:hover { color: var(--text); }
+
+        .lang-btn.is-active {
+            color: var(--accent);
+            background: var(--accent-soft);
+        }
+
+        .icon-btn {
+            width: 36px;
+            height: 36px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--line);
+            border-radius: 7px;
+            background: none;
+            color: var(--text-2);
+            cursor: pointer;
+            transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+        }
+
+        .icon-btn:hover {
+            color: var(--text);
+            border-color: var(--line-strong);
+        }
+
+        .icon-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .icon-moon,
+        :root[data-theme="light"] .icon-sun { display: none; }
+        :root[data-theme="light"] .icon-moon { display: block; }
+
+        .menu-btn { display: none; }
+        .menu-btn .icon-close,
+        .nav.is-open .menu-btn .icon-menu { display: none; }
+        .nav.is-open .menu-btn .icon-close { display: block; }
+
+        .hero {
+            position: relative;
+            min-height: clamp(560px, 92vh, 880px);
+            min-height: clamp(560px, 92svh, 880px);
+            display: flex;
+            align-items: center;
+            padding: 140px 0 96px;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background-image: radial-gradient(var(--grid) 1px, transparent 1.6px);
+            background-size: 28px 28px;
+            -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 20%, #000 0%, transparent 70%);
+            mask-image: radial-gradient(ellipse 70% 70% at 50% 20%, #000 0%, transparent 70%);
+        }
+
+        .hero .container { position: relative; }
+
+        .eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            letter-spacing: 0.04em;
+            color: var(--accent);
+            margin-bottom: 28px;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 22px;
+            height: 1px;
+            background: currentColor;
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: clamp(2.25rem, 7vw, 5.125rem);
+            line-height: 1.02;
+            letter-spacing: -0.035em;
+            max-width: 13ch;
+            text-wrap: balance;
+            margin-bottom: 32px;
+        }
+
+        .lede {
+            font-size: clamp(1.0625rem, 1.5vw, 1.1875rem);
+            line-height: 1.65;
+            color: var(--text-2);
+            max-width: 56ch;
+            margin-bottom: 40px;
+            text-wrap: pretty;
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-height: 44px;
+            padding: 0 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: var(--radius-sm);
+            border: 1px solid transparent;
+            transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+        }
+
+        .btn svg {
+            width: 15px;
+            height: 15px;
+            transition: transform var(--dur) var(--ease-out);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--bg);
+            border-color: var(--accent);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-strong);
+            border-color: var(--accent-strong);
+        }
+
+        .btn-primary:hover svg { transform: translateX(3px); }
+
+        .btn-ghost {
+            color: var(--text-2);
+            border-color: var(--line);
+        }
+
+        .btn-ghost:hover {
+            color: var(--text);
+            border-color: var(--line-strong);
+            background: var(--surface);
+        }
+
+        .hero .eyebrow,
+        .hero h1,
+        .hero .lede,
+        .hero .actions {
+            animation: rise 0.8s var(--ease-out) both;
+        }
+
+        .hero h1 { animation-delay: 70ms; }
+        .hero .lede { animation-delay: 140ms; }
+        .hero .actions { animation-delay: 210ms; }
+
+        .section { padding: 112px 0; }
+
+        .section-head {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            letter-spacing: 0.06em;
+            margin-bottom: 18px;
+        }
+
+        .section-head .index { color: var(--accent); }
+        .section-head .kicker { color: var(--text-3); }
+
+        .rule {
+            flex: 1;
+            height: 1px;
+            background: var(--line);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: clamp(1.75rem, 4vw, 2.75rem);
+            line-height: 1.1;
+            letter-spacing: -0.025em;
+            margin-bottom: 48px;
+            text-wrap: balance;
+        }
+
+        .section-intro {
+            color: var(--text-2);
+            font-size: 1.03125rem;
+            line-height: 1.7;
+            max-width: 58ch;
+            margin: -24px 0 40px;
+            text-wrap: pretty;
+        }
+
+        .js .reveal { opacity: 0; }
+
+        .reveal.is-visible {
+            animation: rise 0.8s var(--ease-out) both;
+            animation-delay: calc(var(--i, 0) * 60ms);
+        }
+
+        .about {
+            display: grid;
+            grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+            gap: 64px;
+            align-items: start;
+        }
+
+        .prose p {
+            color: var(--text-2);
+            font-size: 1.03125rem;
+            line-height: 1.75;
+            max-width: 62ch;
+            text-wrap: pretty;
+        }
+
+        .prose p + p { margin-top: 18px; }
+
+        .prose strong {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .facts div {
+            display: grid;
+            grid-template-columns: 96px 1fr;
+            gap: 16px;
+            align-items: baseline;
+            padding: 14px 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .facts div:last-child { border-bottom: 1px solid var(--line); }
+
+        .facts dt {
+            font-family: var(--font-mono);
+            font-size: 0.71875rem;
+            letter-spacing: 0.05em;
+            color: var(--text-3);
+        }
+
+        .facts dd {
+            font-size: 0.90625rem;
+            color: var(--text);
+        }
+
+        .facts a {
+            text-decoration: none;
+            border-bottom: 1px solid var(--line-strong);
+            transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+        }
+
+        .facts a:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .stack { list-style: none; }
+
+        .stack li {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 24px;
+            align-items: baseline;
+            padding: 18px 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .stack li:last-child { border-bottom: 1px solid var(--line); }
+
+        .stack-label {
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: 1rem;
+            letter-spacing: -0.01em;
+        }
+
+        .stack-items {
+            font-size: 0.96875rem;
+            line-height: 1.6;
+            color: var(--text-2);
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 26px 28px 24px;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease), translate var(--dur) var(--ease-out);
+        }
+
+        .card:hover,
+        .card:focus-within {
+            border-color: var(--line-strong);
+            background: var(--surface-hover);
+            translate: 0 -2px;
+        }
+
+        .card:has(a:focus-visible) {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+        }
+
+        .card-shot {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+            object-position: top;
+            margin-bottom: 22px;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-sm);
+            transition: border-color var(--dur) var(--ease);
+        }
+
+        .card:hover .card-shot { border-color: var(--line-strong); }
+
+        .card-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: 1.3125rem;
+            letter-spacing: -0.015em;
+            line-height: 1.2;
+        }
+
+        .card-title a {
+            text-decoration: none;
+            outline: none;
+        }
+
+        .card-title a::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+        }
+
+        .card-arrow {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            color: var(--text-3);
+            transition: color var(--dur) var(--ease), transform var(--dur) var(--ease-out);
+        }
+
+        .card:hover .card-arrow {
+            color: var(--accent);
+            transform: translate(2px, -2px);
+        }
+
+        .card p {
+            flex: 1;
+            color: var(--text-2);
+            font-size: 0.9375rem;
+            line-height: 1.7;
+            margin-bottom: 22px;
+            text-wrap: pretty;
+        }
+
+        .card-foot {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            list-style: none;
+        }
+
+        .tags li {
+            font-family: var(--font-mono);
+            font-size: 0.6875rem;
+            letter-spacing: 0.02em;
+            padding: 4px 8px;
+            border: 1px solid var(--line);
+            border-radius: 5px;
+            color: var(--text-2);
+        }
+
+        .card-live {
+            position: relative;
+            z-index: 1;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 4px 0;
+            font-family: var(--font-mono);
+            font-size: 0.71875rem;
+            letter-spacing: 0.04em;
+            color: var(--teal);
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .card-live::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        .card-live:hover {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .more { margin-top: 24px; }
+
+        .more a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.875rem;
+            color: var(--text-2);
+            text-decoration: none;
+            transition: color var(--dur-fast) var(--ease);
+        }
+
+        .more svg {
+            width: 15px;
+            height: 15px;
+            transition: transform var(--dur) var(--ease-out);
+        }
+
+        .more a:hover { color: var(--accent); }
+        .more a:hover svg { transform: translate(2px, -2px); }
+
+        .minecraft { margin-top: 72px; }
+
+        .sub-head {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+
+        .sub-head h3 {
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: 1.375rem;
+            letter-spacing: -0.02em;
+        }
+
+        .sub-intro {
+            color: var(--text-2);
+            font-size: 0.96875rem;
+            line-height: 1.7;
+            max-width: 60ch;
+            margin-bottom: 28px;
+            text-wrap: pretty;
+        }
+
+        .plugins {
+            list-style: none;
+            border-top: 1px solid var(--line);
+        }
+
+        .plugin { border-bottom: 1px solid var(--line); }
+
+        .plugin a {
+            display: grid;
+            grid-template-columns: 200px minmax(0, 1fr) 16px;
+            gap: 24px;
+            align-items: start;
+            padding: 18px 12px;
+            margin-inline: -12px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            transition: background var(--dur-fast) var(--ease);
+        }
+
+        .plugin a:hover { background: var(--surface-hover); }
+
+        .plugin-name {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: 1rem;
+            letter-spacing: -0.01em;
+            line-height: 1.4;
+        }
+
+        .plugin-desc {
+            font-size: 0.90625rem;
+            line-height: 1.65;
+            color: var(--text-2);
+            text-wrap: pretty;
+        }
+
+        .plugin-body {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .plugin-stats {
+            font-family: var(--font-mono);
+            font-size: 0.71875rem;
+            letter-spacing: 0.04em;
+            color: var(--accent);
+        }
+
+        .plugin-arrow {
+            width: 16px;
+            height: 16px;
+            margin-top: 4px;
+            color: var(--text-3);
+            opacity: 0;
+            transform: translate(-4px, 4px);
+            transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease-out), color var(--dur) var(--ease);
+        }
+
+        .plugin a:hover .plugin-arrow {
+            opacity: 1;
+            transform: none;
+            color: var(--accent);
+        }
+
+        .badge {
+            font-family: var(--font-mono);
+            font-size: 0.65625rem;
+            letter-spacing: 0.05em;
+            padding: 2px 7px;
+            border-radius: 4px;
+        }
+
+        .badge-open {
+            color: var(--teal);
+            background: var(--teal-soft);
+        }
+
+        .badge-paid {
+            color: var(--amber);
+            background: var(--amber-soft);
+        }
+
+        .contact-desc {
+            color: var(--text-2);
+            font-size: 1.0625rem;
+            line-height: 1.7;
+            max-width: 56ch;
+            margin: -20px 0 36px;
+            text-wrap: pretty;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            min-height: 48px;
+            padding: 0 20px;
+            font-size: 0.90625rem;
+            text-decoration: none;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-sm);
+            transition: border-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease), translate var(--dur) var(--ease-out);
+        }
+
+        .contact-link svg {
+            width: 17px;
+            height: 17px;
+            flex-shrink: 0;
+        }
+
+        .contact-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: var(--accent-soft);
+            translate: 0 -1px;
+        }
+
+        footer { border-top: 1px solid var(--line); }
+
+        footer .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding-block: 28px;
+            font-size: 0.8125rem;
+            color: var(--text-3);
+        }
+
+        footer .name {
+            font-family: var(--font-display);
+            font-weight: 500;
+            color: var(--text-2);
+        }
+
+        footer a {
+            text-decoration: none;
+            transition: color var(--dur-fast) var(--ease);
+        }
+
+        footer a:hover { color: var(--text); }
+
+        @media (max-width: 900px) {
+            :root { --gutter: 28px; }
+            .section { padding: 84px 0; }
+            .about { grid-template-columns: 1fr; gap: 40px; }
+            .projects { grid-template-columns: 1fr; }
+            .stack li { grid-template-columns: 140px 1fr; }
+            .minecraft { margin-top: 56px; }
+        }
+
+        @media (max-width: 720px) {
+            .menu-btn { display: grid; }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                gap: 2px;
+                padding: 10px max(16px, env(safe-area-inset-right)) 14px max(16px, env(safe-area-inset-left));
+                background: var(--bg-elev);
+                border-bottom: 1px solid var(--line);
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-8px);
+                transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease-out), visibility 0s linear var(--dur);
+            }
+
+            .nav.is-open .nav-links {
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                transition-delay: 0s;
+            }
+
+            .nav-links a {
+                padding: 12px;
+                font-size: 0.9375rem;
+            }
+
+            .nav-links a::after { display: none; }
+            .nav-links a.is-active { color: var(--accent); }
+
+            .stack li { grid-template-columns: 1fr; gap: 6px; }
+            .plugin a { grid-template-columns: 1fr; gap: 6px; }
+            .plugin-arrow { display: none; }
+        }
+
+        @media (max-width: 480px) {
+            :root { --gutter: 20px; }
+            .section { padding: 64px 0; }
+            .hero { padding-top: 120px; }
+            .section-title { margin-bottom: 36px; }
+            .section-intro { margin-top: -14px; }
+            .actions { flex-direction: column; align-items: stretch; }
+            .btn { justify-content: center; }
+            .card { padding: 22px 22px 20px; }
+            .card-foot { flex-direction: column; align-items: flex-start; }
+            .facts div { grid-template-columns: 84px 1fr; }
+            footer .container { flex-direction: column; align-items: flex-start; gap: 6px; }
+        }
+
+        @media (min-width: 1600px) {
+            :root { --max: 1100px; }
+        }
+
+        @media (max-height: 640px) {
+            .hero {
+                min-height: auto;
+                padding: 120px 0 72px;
+            }
+        }
+
+        @media (hover: none) {
+            .card:hover,
+            .contact-link:hover { translate: none; }
+        }
+
+        @media print {
+            :root:not([data-theme="light"]) {
+                --bg: #ffffff;
+                --bg-elev: #ffffff;
+                --text: #111111;
+                --text-2: #444444;
+                --text-3: #666666;
+                --line: #dddddd;
+                --line-strong: #bbbbbb;
+                --accent: #3e4bb0;
+                --teal: #1f6f61;
+                --amber: #875a07;
+            }
+
+            :root {
+                --surface: transparent;
+                --surface-hover: transparent;
+                --glow: transparent;
+                --grid: transparent;
+            }
+
+            body { background: #ffffff; }
+            .nav, .skip-link, .hero-bg, .actions { display: none; }
+            .hero { min-height: auto; padding: 24px 0 40px; }
+            .section { padding: 40px 0; }
+            .js .reveal, .hero .eyebrow, .hero h1, .hero .lede { opacity: 1; animation: none; }
+            .card, .plugin, .stack li { break-inside: avoid; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-delay: 0ms !important;
+                transition-duration: 0.01ms !important;
+                transition-delay: 0ms !important;
+            }
+
+            .js .reveal { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <a class="skip-link" href="#about" data-i18n="skip">Skip to content</a>
+
+    <header class="nav" id="nav">
+        <a href="#top" class="nav-logo" aria-label="Xyness, back to top" data-i18n-aria="aria.top">Xyness<span class="dot">.</span></a>
+        <div class="nav-right">
+            <nav class="nav-links" id="nav-links" aria-label="Sections" data-i18n-aria="aria.nav">
+                <a href="#about" data-i18n="nav.about">about</a>
+                <a href="#stack" data-i18n="nav.stack">stack</a>
+                <a href="#projects" data-i18n="nav.projects">projects</a>
+                <a href="#contact" data-i18n="nav.contact">contact</a>
+            </nav>
+            <div class="nav-actions">
+                <div class="lang-switch" role="group" aria-label="Language" data-i18n-aria="aria.lang">
+                    <button type="button" class="lang-btn is-active" data-lang="en" aria-pressed="true">EN</button>
+                    <button type="button" class="lang-btn" data-lang="fr" aria-pressed="false">FR</button>
+                </div>
+                <button type="button" id="theme-toggle" class="icon-btn" aria-label="Switch theme" data-i18n-aria="aria.theme">
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4"/>
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+                    </svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+                    </svg>
+                </button>
+                <button type="button" id="menu-toggle" class="icon-btn menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="nav-links" data-i18n-aria="aria.menu">
+                    <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+                        <path d="M4 7h16M4 12h16M4 17h16"/>
+                    </svg>
+                    <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+                        <path d="M18 6 6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main id="top">
+
+        <section class="hero" id="hero">
+            <div class="hero-bg" aria-hidden="true"></div>
+            <div class="container">
+                <p class="eyebrow" data-i18n="hero.eyebrow">Student in CS, big data and AI</p>
+                <h1 data-i18n="hero.title">I build the things I wanted to exist.</h1>
+                <p class="lede" data-i18n="hero.lede">
+                    Most of what's on this page started as a tool for a server I run,
+                    a script to skip a chore, or an excuse to learn something new.
+                    Then it got finished, because I was the one using it.
+                </p>
+                <div class="actions">
+                    <a href="#projects" class="btn btn-primary">
+                        <span data-i18n="hero.cta1">See the projects</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a href="#contact" class="btn btn-ghost" data-i18n="hero.cta2">Get in touch</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="about" aria-labelledby="about-title">
+            <div class="container">
+                <div class="section-head reveal">
+                    <span class="index">01</span>
+                    <span class="kicker" data-i18n="kicker.about">about</span>
+                    <span class="rule"></span>
+                </div>
+                <h2 class="section-title reveal" id="about-title" style="--i: 1" data-i18n="about.title">The short version.</h2>
+                <div class="about">
+                    <div class="prose reveal" style="--i: 2">
+                        <p data-i18n-html="about.p1">
+                            I'm studying <strong>computer science, big data and AI</strong>,
+                            with maths and statistics on the side. School covers the theory.
+                            The projects on this page are where I actually learn: by building
+                            something, breaking it, and trying again.
+                        </p>
+                        <p data-i18n-html="about.p2">
+                            I follow a project all the way through, from the first architecture
+                            sketch to the boring maintenance afterwards. <strong>Security</strong>
+                            gets a lot of my attention, mostly because I run servers and have
+                            learned the hard way what happens when you don't.
+                        </p>
+                    </div>
+                    <dl class="facts" data-stagger>
+                        <div class="reveal">
+                            <dt data-i18n="fact.running">running on</dt>
+                            <dd><a href="#minecraft" data-i18n="fact.running.v">about 700 Minecraft servers</a></dd>
+                        </div>
+                        <div class="reveal">
+                            <dt data-i18n="fact.languages">languages</dt>
+                            <dd data-i18n="fact.languages.v">French, English, Spanish</dd>
+                        </div>
+                        <div class="reveal">
+                            <dt data-i18n="fact.focus">focus</dt>
+                            <dd data-i18n="fact.focus.v">Full-stack, data, security</dd>
+                        </div>
+                        <div class="reveal">
+                            <dt>github</dt>
+                            <dd><a href="https://github.com/Xyness" target="_blank" rel="noopener">@Xyness</a></dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="stack" aria-labelledby="stack-title">
+            <div class="container">
+                <div class="section-head reveal">
+                    <span class="index">02</span>
+                    <span class="kicker" data-i18n="kicker.stack">stack</span>
+                    <span class="rule"></span>
+                </div>
+                <h2 class="section-title reveal" id="stack-title" style="--i: 1" data-i18n="stack.title">What I work with.</h2>
+                <ul class="stack" data-stagger>
+                    <li class="reveal">
+                        <span class="stack-label" data-i18n="stack.languages">Languages</span>
+                        <span class="stack-items" data-i18n="stack.languages.v">Python, TypeScript, Rust, Java, SQL, Bash</span>
+                    </li>
+                    <li class="reveal">
+                        <span class="stack-label" data-i18n="stack.backend">Backend</span>
+                        <span class="stack-items" data-i18n="stack.backend.v">FastAPI, Node.js, Next.js, REST APIs</span>
+                    </li>
+                    <li class="reveal">
+                        <span class="stack-label" data-i18n="stack.data">Data &amp; AI</span>
+                        <span class="stack-items" data-i18n="stack.data.v">Pandas, scikit-learn, PyTorch, Spark, Kafka, statistics</span>
+                    </li>
+                    <li class="reveal">
+                        <span class="stack-label" data-i18n="stack.infra">Infrastructure</span>
+                        <span class="stack-items" data-i18n="stack.infra.v">Docker, Linux, Git, CI/CD, VPS and cloud</span>
+                    </li>
+                    <li class="reveal">
+                        <span class="stack-label" data-i18n="stack.security">Security</span>
+                        <span class="stack-items" data-i18n="stack.security.v">Application security, server auditing, threat analysis</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section" id="projects" aria-labelledby="projects-title">
+            <div class="container">
+                <div class="section-head reveal">
+                    <span class="index">03</span>
+                    <span class="kicker" data-i18n="kicker.projects">projects</span>
+                    <span class="rule"></span>
+                </div>
+                <h2 class="section-title reveal" id="projects-title" style="--i: 1" data-i18n="projects.title">What I've built.</h2>
+                <p class="section-intro reveal" style="--i: 2" data-i18n="projects.intro">
+                    Four I'd show first. Each one has a README that goes into the details.
+                </p>
+
+                <div class="projects" data-stagger>
+                    <article class="card reveal">
+                        <img class="card-shot" src="img/sentinel.webp" width="800" height="500" alt="" loading="lazy" decoding="async">
+                        <div class="card-head">
+                            <h3 class="card-title"><a href="https://github.com/Xyness/Sentinel" target="_blank" rel="noopener">Sentinel</a></h3>
+                            <svg class="card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M7 17 17 7M7 7h10v10"/>
+                            </svg>
+                        </div>
+                        <p data-i18n="proj.sentinel">
+                            Streaming anomaly detection on crypto trades: Kafka carries them,
+                            Spark turns them into per-minute features, an Isolation Forest flags
+                            what looks wrong, a terminal client shows the result. A simulator
+                            injects anomalies on purpose, so the detector gets measured rather
+                            than trusted.
+                        </p>
+                        <div class="card-foot">
+                            <ul class="tags">
+                                <li>Kafka</li>
+                                <li>Spark</li>
+                                <li>Python</li>
+                                <li>Java</li>
+                                <li>Docker</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="card reveal">
+                        <img class="card-shot" src="img/phantom.webp" width="800" height="500" alt="" loading="lazy" decoding="async">
+                        <div class="card-head">
+                            <h3 class="card-title"><a href="https://github.com/Xyness/Phantom" target="_blank" rel="noopener">Phantom</a></h3>
+                            <svg class="card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M7 17 17 7M7 7h10v10"/>
+                            </svg>
+                        </div>
+                        <p data-i18n="proj.phantom">
+                            Maps the attack surface of a host you're allowed to scan: open ports
+                            and what's behind them, DNS and subdomains, TLS and HTTP posture,
+                            files forgotten on a web root. The port scanner is its own Rust
+                            binary, and every scan lands in a SQLite file you can list, diff
+                            and export.
+                        </p>
+                        <div class="card-foot">
+                            <ul class="tags">
+                                <li>Rust</li>
+                                <li>Python</li>
+                                <li>asyncio</li>
+                                <li>SQLite</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="card reveal">
+                        <img class="card-shot" src="img/sysaudit.webp" width="800" height="500" alt="" loading="lazy" decoding="async">
+                        <div class="card-head">
+                            <h3 class="card-title"><a href="https://github.com/Xyness/SysAudit" target="_blank" rel="noopener">SysAudit</a></h3>
+                            <svg class="card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M7 17 17 7M7 7h10v10"/>
+                            </svg>
+                        </div>
+                        <p data-i18n="proj.sysaudit">
+                            A command-line security audit of the machine you're sitting at, on
+                            Linux, macOS or Windows: services, listening sockets, firewall,
+                            accounts, SSH keys, file permissions, packages checked against
+                            OSV.dev. Out comes a score out of 100 and one self-contained HTML
+                            report, each finding with the commands that fix it.
+                        </p>
+                        <div class="card-foot">
+                            <ul class="tags">
+                                <li>Python</li>
+                                <li>Typer</li>
+                                <li>Jinja</li>
+                                <li>OSV.dev</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="card reveal">
+                        <img class="card-shot" src="img/gitpulse.webp" width="800" height="500" alt="" loading="lazy" decoding="async">
+                        <div class="card-head">
+                            <h3 class="card-title"><a href="https://github.com/Xyness/GitPulse" target="_blank" rel="noopener">GitPulse</a></h3>
+                            <svg class="card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M7 17 17 7M7 7h10v10"/>
+                            </svg>
+                        </div>
+                        <p data-i18n="proj.gitpulse">
+                            Type a GitHub username and the profile comes back as something worth
+                            looking at: repos as a force-directed constellation, a clickable
+                            contribution heatmap, a streamgraph of languages over the years, and
+                            a Wrapped-style recap with its own shareable URL. No login anywhere.
+                        </p>
+                        <div class="card-foot">
+                            <ul class="tags">
+                                <li>Next.js</li>
+                                <li>TypeScript</li>
+                                <li>D3</li>
+                                <li>Tailwind</li>
+                            </ul>
+                            <a class="card-live" href="https://git-pulse-virid.vercel.app" target="_blank" rel="noopener" aria-label="GitPulse, live demo" data-i18n-aria="aria.live">
+                                <span data-i18n="proj.live">live</span>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+
+                <p class="more reveal">
+                    <a href="https://github.com/Xyness?tab=repositories" target="_blank" rel="noopener">
+                        <span data-i18n="projects.more">The rest is on GitHub</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M7 17 17 7M7 7h10v10"/>
+                        </svg>
+                    </a>
+                </p>
+
+                <div class="minecraft" id="minecraft">
+                    <div class="sub-head reveal">
+                        <h3 data-i18n="mc.title">Minecraft plugins</h3>
+                        <span class="rule"></span>
+                    </div>
+                    <p class="sub-intro reveal" style="--i: 1" data-i18n="mc.intro">
+                        Two claim plugins and a framework with its own addons, all running on
+                        real servers, some open source and some paid. The corner of programming
+                        I keep coming back to.
+                    </p>
+                    <ul class="plugins" data-stagger>
+                        <li class="plugin reveal">
+                            <a href="https://github.com/Xyness/SimpleClaimSystem" target="_blank" rel="noopener">
+                                <span class="plugin-name">SimpleClaimSystem <span class="badge badge-open" data-i18n="badge.open">open source</span></span>
+                                <span class="plugin-body">
+                                    <span class="plugin-desc" data-i18n="mc.scs">Chunk-based land protection: menus to claim, merge and sell territory, 30+ settings per claim, map integrations, an API for other plugins. 1.18+, Folia included.</span>
+                                    <span class="plugin-stats" data-i18n="mc.scs.stats">100k+ downloads, about 700 servers, rated 4.9/5 on Spigot</span>
+                                </span>
+                                <svg class="plugin-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+                            </a>
+                        </li>
+                        <li class="plugin reveal">
+                            <a href="https://celestis.dev/plugins/simpleclaimsystem2" target="_blank" rel="noopener">
+                                <span class="plugin-name">SimpleClaimSystem 2 <span class="badge badge-paid" data-i18n="badge.paid">paid</span></span>
+                                <span class="plugin-desc" data-i18n="mc.scs2">The rewrite, for servers that outgrew a single permission list: roles per claim, 130+ permissions, 70+ protection flags, rent, an exportable audit log.</span>
+                                <svg class="plugin-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+                            </a>
+                        </li>
+                        <li class="plugin reveal">
+                            <a href="https://github.com/Xyness/XCore" target="_blank" rel="noopener">
+                                <span class="plugin-name">XCore <span class="badge badge-open" data-i18n="badge.open">open source</span></span>
+                                <span class="plugin-desc" data-i18n="mc.xcore">The framework the other X plugins sit on: three cache layers, cross-server sync over Redis, an addon loader, GUIs described in YAML, a multi-currency economy, a web dashboard.</span>
+                                <svg class="plugin-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+                            </a>
+                        </li>
+                        <li class="plugin reveal">
+                            <a href="https://celestis.dev/plugins/xbans" target="_blank" rel="noopener">
+                                <span class="plugin-name">XBans <span class="badge badge-paid" data-i18n="badge.paid">paid</span></span>
+                                <span class="plugin-desc" data-i18n="mc.xbans">Bans, mutes, warns and jails, plus ban waves. A Bayesian chat classifier trained in five languages reads through obfuscation, and alt detection weighs eleven signals.</span>
+                                <svg class="plugin-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+                            </a>
+                        </li>
+                        <li class="plugin reveal">
+                            <a href="https://celestis.dev/plugins/xauctionhouse" target="_blank" rel="noopener">
+                                <span class="plugin-name">XAuctionHouse <span class="badge badge-paid" data-i18n="badge.paid">paid</span></span>
+                                <span class="plugin-desc" data-i18n="mc.xah">Fixed-price listings and live auctions in any currency XCore knows, with snipe protection, tiered bids, search and price history.</span>
+                                <svg class="plugin-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+                            </a>
+                        </li>
+                        <li class="plugin reveal">
+                            <a href="https://celestis.dev/plugins/xlogin" target="_blank" rel="noopener">
+                                <span class="plugin-name">XLogin <span class="badge badge-paid" data-i18n="badge.paid">paid</span></span>
+                                <span class="plugin-desc" data-i18n="mc.xlogin">Online mode decided per player: premium accounts connect with their skin and no password, everyone else registers. TOTP two-factor, sessions shared across servers, one jar for Velocity, BungeeCord and XCore.</span>
+                                <svg class="plugin-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+                            </a>
+                        </li>
+                        <li class="plugin reveal">
+                            <a href="https://celestis.dev/plugins/xantilag" target="_blank" rel="noopener">
+                                <span class="plugin-name">XAntiLag <span class="badge badge-paid" data-i18n="badge.paid">paid</span></span>
+                                <span class="plugin-desc" data-i18n="mc.xantilag">Prevention rather than cleanup: per-chunk caps, mob and item stackers, redstone clock detection, and a TPS monitor that steps up optimisation as the server degrades and back down as it recovers.</span>
+                                <svg class="plugin-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="contact" aria-labelledby="contact-title">
+            <div class="container">
+                <div class="section-head reveal">
+                    <span class="index">04</span>
+                    <span class="kicker" data-i18n="kicker.contact">contact</span>
+                    <span class="rule"></span>
+                </div>
+                <h2 class="section-title reveal" id="contact-title" style="--i: 1" data-i18n="contact.title">Say hi.</h2>
+                <p class="contact-desc reveal" style="--i: 2" data-i18n="contact.desc">
+                    Email is the easiest way to reach me. I read everything and reply to
+                    most of it: a project, a question, or just something you're working on.
+                </p>
+                <div class="contact-links reveal" style="--i: 3">
+                    <a href="mailto:xyness@icloud.com" class="contact-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="2" y="4" width="20" height="16" rx="2"/>
+                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                        </svg>
+                        xyness@icloud.com
+                    </a>
+                    <a href="https://github.com/Xyness" target="_blank" rel="noopener" class="contact-link">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                        </svg>
+                        GitHub
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <span><span class="name">Xyness</span>, 2026</span>
+            <a href="https://github.com/Xyness/xyness.github.io" target="_blank" rel="noopener" data-i18n="footer.source">source</a>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('[data-stagger]').forEach(group => {
+            Array.from(group.children).forEach((el, i) => el.style.setProperty('--i', Math.min(i, 6)));
+        });
+
+        const revealer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('is-visible');
+                revealer.unobserve(entry.target);
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
+        document.querySelectorAll('.reveal').forEach(el => revealer.observe(el));
+    </script>
+    <script>
+        const I18N = {
+            en: {},
+            fr: {
+                "meta.title": "Xyness | Portfolio",
+                "meta.desc": "Xyness, étudiant en informatique, big data et IA. Outils, plugins et projets perso, construits parce que je voulais qu'ils existent.",
+                "skip": "Aller au contenu",
+                "aria.top": "Xyness, retour en haut",
+                "aria.nav": "Sections",
+                "aria.lang": "Langue",
+                "aria.theme": "Changer de thème",
+                "aria.menu": "Menu",
+                "aria.live": "GitPulse, démo en ligne",
+
+                "nav.about": "à propos",
+                "nav.stack": "stack",
+                "nav.projects": "projets",
+                "nav.contact": "contact",
+
+                "hero.eyebrow": "Étudiant en info, big data et IA",
+                "hero.title": "Je construis ce que je voulais voir exister.",
+                "hero.lede": "La plupart de ce qui est ici a commencé comme un outil pour un serveur que je gère, un script pour m'éviter une corvée, ou un prétexte pour apprendre quelque chose de nouveau. Et je suis allé au bout, parce que c'est moi qui m'en servais.",
+                "hero.cta1": "Voir les projets",
+                "hero.cta2": "Me contacter",
+
+                "kicker.about": "à propos",
+                "about.title": "La version courte.",
+                "about.p1": "J'étudie l'<strong>informatique, le big data et l'IA</strong>, avec des maths et des statistiques à côté. L'école couvre la théorie. Les projets de cette page sont là où j'apprends vraiment\u00a0: en construisant, en cassant, et en recommençant.",
+                "about.p2": "Je mène un projet jusqu'au bout, du premier schéma d'architecture à la maintenance ennuyeuse qui suit. La <strong>sécurité</strong> occupe une bonne partie de mon attention, surtout parce que je fais tourner des serveurs et que j'ai appris à mes dépens ce qui arrive quand on la néglige.",
+                "fact.running": "tourne sur",
+                "fact.running.v": "environ 700 serveurs Minecraft",
+                "fact.languages": "langues",
+                "fact.languages.v": "Français, anglais, espagnol",
+                "fact.focus": "domaines",
+                "fact.focus.v": "Full-stack, data, sécurité",
+
+                "kicker.stack": "stack",
+                "stack.title": "Ce que j'utilise.",
+                "stack.languages": "Langages",
+                "stack.languages.v": "Python, TypeScript, Rust, Java, SQL, Bash",
+                "stack.backend": "Backend",
+                "stack.backend.v": "FastAPI, Node.js, Next.js, API REST",
+                "stack.data": "Data & IA",
+                "stack.data.v": "Pandas, scikit-learn, PyTorch, Spark, Kafka, statistiques",
+                "stack.infra": "Infrastructure",
+                "stack.infra.v": "Docker, Linux, Git, CI/CD, VPS et cloud",
+                "stack.security": "Sécurité",
+                "stack.security.v": "Sécurité applicative, audit de serveurs, analyse de menaces",
+
+                "kicker.projects": "projets",
+                "projects.title": "Ce que j'ai construit.",
+                "projects.intro": "Quatre à montrer en premier. Chacun a un README qui entre dans le détail.",
+                "projects.more": "Le reste est sur GitHub",
+                "proj.sentinel": "Détection d'anomalies en streaming sur des trades crypto\u00a0: Kafka les transporte, Spark en tire des features par minute, un Isolation Forest signale ce qui cloche, un client terminal affiche le résultat. Un simulateur injecte des anomalies exprès, pour mesurer le détecteur plutôt que lui faire confiance.",
+                "proj.phantom": "Cartographie la surface d'attaque d'une machine que vous avez le droit de scanner\u00a0: ports ouverts et ce qui se cache derrière, DNS et sous-domaines, configuration TLS et HTTP, fichiers oubliés à la racine d'un site. Le scanner de ports est un binaire Rust à part, et chaque scan atterrit dans un fichier SQLite qu'on peut lister, comparer et exporter.",
+                "proj.sysaudit": "Un audit de sécurité en ligne de commande de la machine devant vous, sous Linux, macOS ou Windows\u00a0: services, ports en écoute, pare-feu, comptes, clés SSH, permissions, paquets confrontés à OSV.dev. En sortie, une note sur 100 et un seul rapport HTML autonome, chaque problème accompagné des commandes qui le corrigent.",
+                "proj.gitpulse": "Tapez un pseudo GitHub et le profil revient sous une forme qui vaut le coup d'œil\u00a0: les dépôts en constellation à simulation de forces, une heatmap de contributions cliquable, un streamgraph des langages au fil des années, et un récap façon Wrapped avec sa propre URL à partager. Pas besoin de se connecter.",
+                "proj.live": "live",
+
+                "mc.title": "Plugins Minecraft",
+                "mc.intro": "Deux plugins de protection de terrain et un framework avec ses propres addons, tous en production sur de vrais serveurs, certains open source, d'autres payants. Le coin de la programmation où je reviens toujours.",
+                "mc.scs": "Protection de terrain par chunk\u00a0: des menus pour revendiquer, fusionner et revendre, plus de 30 réglages par claim, intégration aux cartes, une API pour les autres plugins. 1.18+, Folia compris.",
+                "mc.scs.stats": "Plus de 100k téléchargements, environ 700 serveurs, noté 4,9/5 sur Spigot",
+                "mc.scs2": "La réécriture, pour les serveurs qui ont dépassé le stade d'une seule liste de permissions\u00a0: rôles par claim, plus de 130 permissions, plus de 70 flags de protection, loyers, journal d'audit exportable.",
+                "mc.xcore": "Le framework sur lequel reposent les autres plugins X\u00a0: trois niveaux de cache, synchronisation inter-serveurs via Redis, chargeur d'addons, menus décrits en YAML, économie multi-devises, dashboard web.",
+                "mc.xbans": "Bans, mutes, avertissements et prisons, plus des vagues de bannissement. Un classifieur bayésien entraîné en cinq langues lit à travers l'obfuscation, et la détection de comptes multiples croise onze signaux.",
+                "mc.xah": "Ventes à prix fixe et enchères en direct dans n'importe quelle devise connue de XCore, avec protection anti-snipe, paliers d'enchère, recherche et historique des prix.",
+                "mc.xlogin": "Le mode online se décide joueur par joueur\u00a0: les comptes premium se connectent avec leur skin et sans mot de passe, les autres s'enregistrent. Double authentification TOTP, sessions partagées entre serveurs, un seul jar pour Velocity, BungeeCord et XCore.",
+                "mc.xantilag": "De la prévention plutôt que du nettoyage\u00a0: limites par chunk, stackers de mobs et d'items, détection des horloges redstone, et un moniteur TPS qui monte les niveaux d'optimisation quand le serveur s'essouffle et les redescend quand il récupère.",
+                "badge.open": "open source",
+                "badge.paid": "payant",
+
+                "kicker.contact": "contact",
+                "contact.title": "Écrivez-moi.",
+                "contact.desc": "Le mail est le plus simple pour me joindre. Je lis tout et je réponds à la plupart\u00a0: un projet, une question, ou juste quelque chose sur quoi vous travaillez.",
+
+                "footer.source": "source"
+            }
+        };
+
+        const root = document.documentElement;
+        const nav = document.getElementById('nav');
+        const navLinks = document.getElementById('nav-links');
+        const menuBtn = document.getElementById('menu-toggle');
+        const themeBtn = document.getElementById('theme-toggle');
+        const themeMeta = document.querySelector('meta[name="theme-color"]');
+        const descMeta = document.querySelector('meta[name="description"]');
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+        const clean = text => text.replace(/\s+/g, ' ').trim();
+        document.querySelectorAll('[data-i18n]').forEach(el => { I18N.en[el.dataset.i18n] = clean(el.textContent); });
+        document.querySelectorAll('[data-i18n-html]').forEach(el => { I18N.en[el.dataset.i18nHtml] = clean(el.innerHTML); });
+        document.querySelectorAll('[data-i18n-aria]').forEach(el => { I18N.en[el.dataset.i18nAria] = el.getAttribute('aria-label'); });
+        I18N.en['meta.title'] = document.title;
+        I18N.en['meta.desc'] = descMeta.getAttribute('content');
+
+        const missing = Object.keys(I18N.en).filter(key => !(key in I18N.fr));
+        if (missing.length) console.warn('i18n: missing fr keys', missing);
+
+        function store(key, value) {
+            try { localStorage.setItem(key, value); } catch (e) {}
+        }
+
+        function swap(change) {
+            if (document.startViewTransition && !reducedMotion.matches) {
+                document.startViewTransition(change);
+            } else {
+                change();
+            }
+        }
+
+        function applyTheme(theme) {
+            root.setAttribute('data-theme', theme);
+            themeMeta.setAttribute('content', theme === 'light' ? '#f9f9fb' : '#0c0e14');
+        }
+
+        applyTheme(root.getAttribute('data-theme'));
+
+        themeBtn.addEventListener('click', () => {
+            const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            swap(() => applyTheme(next));
+            store('xyness.theme', next);
+        });
+
+        function applyLanguage(code) {
+            const dict = I18N[code] || I18N.en;
+            root.setAttribute('lang', code);
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const value = dict[el.dataset.i18n];
+                if (value !== undefined) el.textContent = value;
+            });
+            document.querySelectorAll('[data-i18n-html]').forEach(el => {
+                const value = dict[el.dataset.i18nHtml];
+                if (value !== undefined) el.innerHTML = value;
+            });
+            document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+                const value = dict[el.dataset.i18nAria];
+                if (value !== undefined) el.setAttribute('aria-label', value);
+            });
+
+            document.title = dict['meta.title'];
+            descMeta.setAttribute('content', dict['meta.desc']);
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                const on = btn.dataset.lang === code;
+                btn.classList.toggle('is-active', on);
+                btn.setAttribute('aria-pressed', String(on));
+            });
+        }
+
+        if (root.lang === 'fr') applyLanguage('fr');
+        root.classList.remove('is-translating');
+
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (btn.classList.contains('is-active')) return;
+                swap(() => applyLanguage(btn.dataset.lang));
+                store('xyness.lang', btn.dataset.lang);
+            });
+        });
+
+        function setMenu(open) {
+            nav.classList.toggle('is-open', open);
+            menuBtn.setAttribute('aria-expanded', String(open));
+        }
+
+        menuBtn.addEventListener('click', () => setMenu(!nav.classList.contains('is-open')));
+        navLinks.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+        document.addEventListener('click', e => { if (!nav.contains(e.target)) setMenu(false); });
+        document.addEventListener('keydown', e => {
+            if (e.key !== 'Escape' || !nav.classList.contains('is-open')) return;
+            if (navLinks.contains(document.activeElement)) menuBtn.focus();
+            setMenu(false);
+        });
+
+        const links = Array.from(navLinks.querySelectorAll('a'));
+        const sections = links.map(a => document.querySelector(a.getAttribute('href')));
+        let frame = 0;
+
+        function update() {
+            frame = 0;
+            const y = window.scrollY;
+            nav.classList.toggle('is-scrolled', y > 24);
+
+            const height = window.innerHeight;
+            const maxScroll = Math.max(1, document.documentElement.scrollHeight - height);
+            const progress = Math.min(1, y / maxScroll);
+            const line = height * 0.35;
+            const reading = y + line + (height - line) * progress;
+
+            let current = -1;
+            sections.forEach((section, i) => {
+                if (section.getBoundingClientRect().top + y <= reading) current = i;
+            });
+            links.forEach((a, i) => a.classList.toggle('is-active', i === current));
+        }
+
+        function schedule() {
+            if (!frame) frame = requestAnimationFrame(update);
+        }
+
+        window.addEventListener('scroll', schedule, { passive: true });
+        window.addEventListener('resize', schedule);
+        update();
+    </script>
+</body>
+</html>
