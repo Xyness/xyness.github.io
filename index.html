@@ -28,7 +28,9 @@
             function pick(key) {
                 var value = params.get(key);
                 if (value) return value;
-                try { return localStorage.getItem('xyness.' + key); } catch (e) { return null; }
+                try { value = localStorage.getItem('xyness.' + key); } catch (e) {}
+                if (!value && key === 'lang' && /^fr\b/i.test(navigator.language || '')) return 'fr';
+                return value;
             }
             root.classList.add('js');
             root.setAttribute('data-theme', pick('theme') === 'light' ? 'light' : 'dark');
@@ -135,7 +137,7 @@
         body {
             font-family: var(--font-body);
             background:
-                radial-gradient(ellipse 90% 50% at 50% -10%, var(--glow), transparent 60%),
+                radial-gradient(ellipse 90% 50% at 50% -10%, var(--glow), transparent 60%) no-repeat,
                 var(--bg);
             color: var(--text);
             line-height: 1.65;
@@ -533,7 +535,7 @@
 
         .facts div {
             display: grid;
-            grid-template-columns: 96px 1fr;
+            grid-template-columns: 7rem 1fr;
             gap: 16px;
             align-items: baseline;
             padding: 14px 0;
@@ -554,13 +556,17 @@
             color: var(--text);
         }
 
-        .facts a {
+        .facts a,
+        .lede a {
             text-decoration: none;
             border-bottom: 1px solid var(--line-strong);
             transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
         }
 
-        .facts a:hover {
+        .lede a { color: var(--text); }
+
+        .facts a:hover,
+        .lede a:hover {
             color: var(--accent);
             border-color: var(--accent);
         }
@@ -569,7 +575,7 @@
 
         .stack li {
             display: grid;
-            grid-template-columns: 180px 1fr;
+            grid-template-columns: 180px minmax(0, 1fr) auto;
             gap: 24px;
             align-items: baseline;
             padding: 18px 0;
@@ -589,6 +595,26 @@
             font-size: 0.96875rem;
             line-height: 1.6;
             color: var(--text-2);
+        }
+
+        .stack-proof {
+            font-family: var(--font-mono);
+            font-size: 0.71875rem;
+            letter-spacing: 0.04em;
+            color: var(--text-3);
+            white-space: nowrap;
+        }
+
+        .stack-proof a {
+            color: var(--text-2);
+            text-decoration: none;
+            border-bottom: 1px solid var(--line-strong);
+            transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+        }
+
+        .stack-proof a:hover {
+            color: var(--accent);
+            border-color: var(--accent);
         }
 
         .projects {
@@ -676,7 +702,7 @@
             transform: translate(2px, -2px);
         }
 
-        .card p {
+        .card-desc {
             flex: 1;
             color: var(--text-2);
             font-size: 0.9375rem;
@@ -684,6 +710,8 @@
             margin-bottom: 22px;
             text-wrap: pretty;
         }
+
+        .card .stat { margin: -8px 0 20px; }
 
         .card-foot {
             display: flex;
@@ -790,7 +818,8 @@
 
         .plugin { border-bottom: 1px solid var(--line); }
 
-        .plugin a {
+        .plugin-row {
+            position: relative;
             display: grid;
             grid-template-columns: 200px minmax(0, 1fr) 16px;
             gap: 24px;
@@ -798,22 +827,37 @@
             padding: 18px 12px;
             margin-inline: -12px;
             border-radius: var(--radius-sm);
-            text-decoration: none;
             transition: background var(--dur-fast) var(--ease);
         }
 
-        .plugin a:hover { background: var(--surface-hover); }
+        .plugin-row:hover { background: var(--surface-hover); }
+
+        .plugin-row:has(.plugin-link:focus-visible) {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
 
         .plugin-name {
             display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 8px;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
             font-family: var(--font-display);
             font-weight: 500;
             font-size: 1rem;
             letter-spacing: -0.01em;
             line-height: 1.4;
+        }
+
+        .plugin-link {
+            text-decoration: none;
+            outline: none;
+        }
+
+        .plugin-link::after {
+            content: "";
+            position: absolute;
+            inset: 0;
         }
 
         .plugin-desc {
@@ -829,12 +873,22 @@
             gap: 8px;
         }
 
-        .plugin-stats {
+        .stat {
             font-family: var(--font-mono);
             font-size: 0.71875rem;
             letter-spacing: 0.04em;
             color: var(--accent);
         }
+
+        .stat a {
+            position: relative;
+            z-index: 1;
+            text-decoration: none;
+            border-bottom: 1px solid var(--line-strong);
+            transition: border-color var(--dur-fast) var(--ease);
+        }
+
+        .stat a:hover { border-color: currentColor; }
 
         .plugin-arrow {
             width: 16px;
@@ -846,7 +900,7 @@
             transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease-out), color var(--dur) var(--ease);
         }
 
-        .plugin a:hover .plugin-arrow {
+        .plugin-row:hover .plugin-arrow {
             opacity: 1;
             transform: none;
             color: var(--accent);
@@ -942,7 +996,7 @@
             .section { padding: 84px 0; }
             .about { grid-template-columns: 1fr; gap: 40px; }
             .projects { grid-template-columns: 1fr; }
-            .stack li { grid-template-columns: 140px 1fr; }
+            .stack li { grid-template-columns: 140px minmax(0, 1fr) auto; }
             .minecraft { margin-top: 56px; }
         }
 
@@ -981,7 +1035,8 @@
             .nav-links a.is-active { color: var(--accent); }
 
             .stack li { grid-template-columns: 1fr; gap: 6px; }
-            .plugin a { grid-template-columns: 1fr; gap: 6px; }
+            .plugin-row { grid-template-columns: 1fr; gap: 6px; }
+            .plugin-name { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 8px; }
             .plugin-arrow { display: none; }
         }
 
@@ -995,7 +1050,7 @@
             .btn { justify-content: center; }
             .card { padding: 22px 22px 20px; }
             .card-foot { flex-direction: column; align-items: flex-start; }
-            .facts div { grid-template-columns: 84px 1fr; }
+            .facts div { grid-template-columns: 6.5rem 1fr; }
             footer .container { flex-direction: column; align-items: flex-start; gap: 6px; }
         }
 
@@ -1104,10 +1159,11 @@
             <div class="container">
                 <p class="eyebrow" data-i18n="hero.eyebrow">Student in CS, big data and AI</p>
                 <h1 data-i18n="hero.title">I build the things I wanted to exist.</h1>
-                <p class="lede" data-i18n="hero.lede">
+                <p class="lede" data-i18n-html="hero.lede">
                     Most of what's on this page started as a tool for a server I run,
                     a script to skip a chore, or an excuse to learn something new.
-                    Then it got finished, because I was the one using it.
+                    Then it got finished, because I was the one using it. One of them
+                    now runs on <a href="#minecraft">about 700 Minecraft servers</a>.
                 </p>
                 <div class="actions">
                     <a href="#projects" class="btn btn-primary">
@@ -1146,11 +1202,11 @@
                     </div>
                     <dl class="facts" data-stagger>
                         <div class="reveal">
-                            <dt data-i18n="fact.running">running on</dt>
+                            <dt data-i18n="fact.running">in production</dt>
                             <dd><a href="#minecraft" data-i18n="fact.running.v">about 700 Minecraft servers</a></dd>
                         </div>
                         <div class="reveal">
-                            <dt data-i18n="fact.languages">languages</dt>
+                            <dt data-i18n="fact.languages">speaks</dt>
                             <dd data-i18n="fact.languages.v">French, English, Spanish</dd>
                         </div>
                         <div class="reveal">
@@ -1182,18 +1238,22 @@
                     <li class="reveal">
                         <span class="stack-label" data-i18n="stack.backend">Backend</span>
                         <span class="stack-items" data-i18n="stack.backend.v">FastAPI, Node.js, Next.js, REST APIs</span>
+                        <span class="stack-proof"><span data-i18n="stack.in">in</span> <a href="#sentinel">Sentinel</a>, <a href="#gitpulse">GitPulse</a></span>
                     </li>
                     <li class="reveal">
                         <span class="stack-label" data-i18n="stack.data">Data &amp; AI</span>
-                        <span class="stack-items" data-i18n="stack.data.v">Pandas, scikit-learn, PyTorch, Spark, Kafka, statistics</span>
+                        <span class="stack-items" data-i18n="stack.data.v">Pandas, scikit-learn, Spark, Kafka, statistics</span>
+                        <span class="stack-proof"><span data-i18n="stack.in">in</span> <a href="#sentinel">Sentinel</a>, <a href="#xbans">XBans</a></span>
                     </li>
                     <li class="reveal">
                         <span class="stack-label" data-i18n="stack.infra">Infrastructure</span>
                         <span class="stack-items" data-i18n="stack.infra.v">Docker, Linux, Git, CI/CD, VPS and cloud</span>
+                        <span class="stack-proof"><span data-i18n="stack.in">in</span> <a href="#sentinel">Sentinel</a>, <a href="#sysaudit">SysAudit</a></span>
                     </li>
                     <li class="reveal">
                         <span class="stack-label" data-i18n="stack.security">Security</span>
-                        <span class="stack-items" data-i18n="stack.security.v">Application security, server auditing, threat analysis</span>
+                        <span class="stack-items" data-i18n="stack.security.v">Application security, server auditing, attack surface mapping</span>
+                        <span class="stack-proof"><span data-i18n="stack.in">in</span> <a href="#phantom">Phantom</a>, <a href="#sysaudit">SysAudit</a></span>
                     </li>
                 </ul>
             </div>
@@ -1212,7 +1272,7 @@
                 </p>
 
                 <div class="projects" data-stagger>
-                    <article class="card reveal">
+                    <article class="card reveal" id="sentinel">
                         <img class="card-shot" src="img/sentinel.webp" width="800" height="500" alt="" loading="lazy" decoding="async">
                         <div class="card-head">
                             <h3 class="card-title"><a href="https://github.com/Xyness/Sentinel" target="_blank" rel="noopener">Sentinel</a></h3>
@@ -1220,13 +1280,13 @@
                                 <path d="M7 17 17 7M7 7h10v10"/>
                             </svg>
                         </div>
-                        <p data-i18n="proj.sentinel">
+                        <p class="card-desc" data-i18n="proj.sentinel">
                             Streaming anomaly detection on crypto trades: Kafka carries them,
                             Spark turns them into per-minute features, an Isolation Forest flags
-                            what looks wrong, a terminal client shows the result. A simulator
-                            injects anomalies on purpose, so the detector gets measured rather
-                            than trusted.
+                            what looks wrong. A simulator injects anomalies on purpose, so the
+                            detector gets measured rather than trusted.
                         </p>
+                        <p class="stat" data-i18n="proj.sentinel.stat">CI runs the whole pipeline end to end</p>
                         <div class="card-foot">
                             <ul class="tags">
                                 <li>Kafka</li>
@@ -1238,7 +1298,7 @@
                         </div>
                     </article>
 
-                    <article class="card reveal">
+                    <article class="card reveal" id="phantom">
                         <img class="card-shot" src="img/phantom.webp" width="800" height="500" alt="" loading="lazy" decoding="async">
                         <div class="card-head">
                             <h3 class="card-title"><a href="https://github.com/Xyness/Phantom" target="_blank" rel="noopener">Phantom</a></h3>
@@ -1246,13 +1306,12 @@
                                 <path d="M7 17 17 7M7 7h10v10"/>
                             </svg>
                         </div>
-                        <p data-i18n="proj.phantom">
+                        <p class="card-desc" data-i18n="proj.phantom">
                             Maps the attack surface of a host you're allowed to scan: open ports
                             and what's behind them, DNS and subdomains, TLS and HTTP posture,
-                            files forgotten on a web root. The port scanner is its own Rust
-                            binary, and every scan lands in a SQLite file you can list, diff
-                            and export.
+                            files forgotten on a web root. The port scanner is its own Rust binary.
                         </p>
+                        <p class="stat" data-i18n="proj.phantom.stat">338 Python tests and 8 Rust tests, all offline</p>
                         <div class="card-foot">
                             <ul class="tags">
                                 <li>Rust</li>
@@ -1263,7 +1322,7 @@
                         </div>
                     </article>
 
-                    <article class="card reveal">
+                    <article class="card reveal" id="sysaudit">
                         <img class="card-shot" src="img/sysaudit.webp" width="800" height="500" alt="" loading="lazy" decoding="async">
                         <div class="card-head">
                             <h3 class="card-title"><a href="https://github.com/Xyness/SysAudit" target="_blank" rel="noopener">SysAudit</a></h3>
@@ -1271,13 +1330,12 @@
                                 <path d="M7 17 17 7M7 7h10v10"/>
                             </svg>
                         </div>
-                        <p data-i18n="proj.sysaudit">
+                        <p class="card-desc" data-i18n="proj.sysaudit">
                             A command-line security audit of the machine you're sitting at, on
-                            Linux, macOS or Windows: services, listening sockets, firewall,
-                            accounts, SSH keys, file permissions, packages checked against
-                            OSV.dev. Out comes a score out of 100 and one self-contained HTML
-                            report, each finding with the commands that fix it.
+                            Linux, macOS or Windows. Out comes a score out of 100 and one
+                            self-contained HTML report, each finding with the commands that fix it.
                         </p>
+                        <p class="stat" data-i18n="proj.sysaudit.stat">394 tests, CI on Linux, macOS and Windows</p>
                         <div class="card-foot">
                             <ul class="tags">
                                 <li>Python</li>
@@ -1288,7 +1346,7 @@
                         </div>
                     </article>
 
-                    <article class="card reveal">
+                    <article class="card reveal" id="gitpulse">
                         <img class="card-shot" src="img/gitpulse.webp" width="800" height="500" alt="" loading="lazy" decoding="async">
                         <div class="card-head">
                             <h3 class="card-title"><a href="https://github.com/Xyness/GitPulse" target="_blank" rel="noopener">GitPulse</a></h3>
@@ -1296,11 +1354,10 @@
                                 <path d="M7 17 17 7M7 7h10v10"/>
                             </svg>
                         </div>
-                        <p data-i18n="proj.gitpulse">
-                            Type a GitHub username and the profile comes back as something worth
-                            looking at: repos as a force-directed constellation, a clickable
-                            contribution heatmap, a streamgraph of languages over the years, and
-                            a Wrapped-style recap with its own shareable URL. No login anywhere.
+                        <p class="card-desc" data-i18n="proj.gitpulse">
+                            Type a GitHub username and the profile comes back as a constellation
+                            of repos, a clickable contribution heatmap, languages over the years
+                            and a Wrapped-style recap with its own URL. No login anywhere.
                         </p>
                         <div class="card-foot">
                             <ul class="tags">
@@ -1316,6 +1373,72 @@
                     </article>
                 </div>
 
+                <div class="minecraft" id="minecraft">
+                    <div class="sub-head reveal">
+                        <h3 data-i18n="mc.title">Minecraft plugins</h3>
+                        <span class="rule"></span>
+                    </div>
+                    <p class="sub-intro reveal" style="--i: 1" data-i18n="mc.intro">
+                        Two claim plugins and a framework with its own addons, written in Java
+                        and running on real servers, some open source and some paid. The corner
+                        of programming I keep coming back to.
+                    </p>
+                    <ul class="plugins" data-stagger>
+                        <li class="plugin reveal">
+                            <div class="plugin-row">
+                                <span class="plugin-name"><a class="plugin-link" href="https://github.com/Xyness/SimpleClaimSystem" target="_blank" rel="noopener">SimpleClaimSystem</a> <span class="badge badge-open" data-i18n="badge.open">open source</span></span>
+                                <span class="plugin-body">
+                                    <span class="plugin-desc" data-i18n="mc.scs">Chunk-based land protection: menus to claim, merge and sell territory, 30+ settings per claim, map integrations, an API for other plugins. 1.18+, Folia included.</span>
+                                    <span class="stat" data-i18n-html="mc.scs.stats">100k+ downloads, <a href="https://bstats.org/plugin/bukkit/SimpleClaimSystem/21435" target="_blank" rel="noopener">about 700 servers</a>, <a href="https://www.spigotmc.org/resources/115568/" target="_blank" rel="noopener">rated 4.9/5 on Spigot</a></span>
+                                </span>
+                                <svg class="plugin-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+                            </div>
+                        </li>
+                        <li class="plugin reveal">
+                            <div class="plugin-row">
+                                <span class="plugin-name"><a class="plugin-link" href="https://celestis.dev/plugins/simpleclaimsystem2" target="_blank" rel="noopener">SimpleClaimSystem 2</a> <span class="badge badge-paid" data-i18n="badge.paid">paid</span></span>
+                                <span class="plugin-desc" data-i18n="mc.scs2">The rewrite, for servers that outgrew a single permission list: roles per claim, 130+ permissions, 70+ protection flags, rent, an exportable audit log.</span>
+                                <svg class="plugin-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+                            </div>
+                        </li>
+                        <li class="plugin reveal">
+                            <div class="plugin-row">
+                                <span class="plugin-name"><a class="plugin-link" href="https://github.com/Xyness/XCore" target="_blank" rel="noopener">XCore</a> <span class="badge badge-open" data-i18n="badge.open">open source</span></span>
+                                <span class="plugin-desc" data-i18n="mc.xcore">The framework the other X plugins sit on: three cache layers, cross-server sync over Redis, an addon loader, GUIs described in YAML, a multi-currency economy, a web dashboard.</span>
+                                <svg class="plugin-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+                            </div>
+                        </li>
+                        <li class="plugin reveal" id="xbans">
+                            <div class="plugin-row">
+                                <span class="plugin-name"><a class="plugin-link" href="https://celestis.dev/plugins/xbans" target="_blank" rel="noopener">XBans</a> <span class="badge badge-paid" data-i18n="badge.paid">paid</span></span>
+                                <span class="plugin-desc" data-i18n="mc.xbans">Bans, mutes, warns and jails, plus ban waves. A Bayesian chat classifier trained in five languages reads through obfuscation, and alt detection weighs eleven signals.</span>
+                                <svg class="plugin-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+                            </div>
+                        </li>
+                        <li class="plugin reveal">
+                            <div class="plugin-row">
+                                <span class="plugin-name"><a class="plugin-link" href="https://celestis.dev/plugins/xauctionhouse" target="_blank" rel="noopener">XAuctionHouse</a> <span class="badge badge-paid" data-i18n="badge.paid">paid</span></span>
+                                <span class="plugin-desc" data-i18n="mc.xah">Fixed-price listings and live auctions in any currency XCore knows, with snipe protection, tiered bids, search and price history.</span>
+                                <svg class="plugin-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+                            </div>
+                        </li>
+                        <li class="plugin reveal">
+                            <div class="plugin-row">
+                                <span class="plugin-name"><a class="plugin-link" href="https://celestis.dev/plugins/xlogin" target="_blank" rel="noopener">XLogin</a> <span class="badge badge-paid" data-i18n="badge.paid">paid</span></span>
+                                <span class="plugin-desc" data-i18n="mc.xlogin">Online mode decided per player: premium accounts connect with their skin and no password, everyone else registers. TOTP two-factor, sessions shared across servers, one jar for Velocity, BungeeCord and XCore.</span>
+                                <svg class="plugin-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+                            </div>
+                        </li>
+                        <li class="plugin reveal">
+                            <div class="plugin-row">
+                                <span class="plugin-name"><a class="plugin-link" href="https://celestis.dev/plugins/xantilag" target="_blank" rel="noopener">XAntiLag</a> <span class="badge badge-paid" data-i18n="badge.paid">paid</span></span>
+                                <span class="plugin-desc" data-i18n="mc.xantilag">Prevention rather than cleanup: per-chunk caps, mob and item stackers, redstone clock detection, and a TPS monitor that steps up optimisation as the server degrades and back down as it recovers.</span>
+                                <svg class="plugin-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
                 <p class="more reveal">
                     <a href="https://github.com/Xyness?tab=repositories" target="_blank" rel="noopener">
                         <span data-i18n="projects.more">The rest is on GitHub</span>
@@ -1324,72 +1447,6 @@
                         </svg>
                     </a>
                 </p>
-
-                <div class="minecraft" id="minecraft">
-                    <div class="sub-head reveal">
-                        <h3 data-i18n="mc.title">Minecraft plugins</h3>
-                        <span class="rule"></span>
-                    </div>
-                    <p class="sub-intro reveal" style="--i: 1" data-i18n="mc.intro">
-                        Two claim plugins and a framework with its own addons, all running on
-                        real servers, some open source and some paid. The corner of programming
-                        I keep coming back to.
-                    </p>
-                    <ul class="plugins" data-stagger>
-                        <li class="plugin reveal">
-                            <a href="https://github.com/Xyness/SimpleClaimSystem" target="_blank" rel="noopener">
-                                <span class="plugin-name">SimpleClaimSystem <span class="badge badge-open" data-i18n="badge.open">open source</span></span>
-                                <span class="plugin-body">
-                                    <span class="plugin-desc" data-i18n="mc.scs">Chunk-based land protection: menus to claim, merge and sell territory, 30+ settings per claim, map integrations, an API for other plugins. 1.18+, Folia included.</span>
-                                    <span class="plugin-stats" data-i18n="mc.scs.stats">100k+ downloads, about 700 servers, rated 4.9/5 on Spigot</span>
-                                </span>
-                                <svg class="plugin-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
-                            </a>
-                        </li>
-                        <li class="plugin reveal">
-                            <a href="https://celestis.dev/plugins/simpleclaimsystem2" target="_blank" rel="noopener">
-                                <span class="plugin-name">SimpleClaimSystem 2 <span class="badge badge-paid" data-i18n="badge.paid">paid</span></span>
-                                <span class="plugin-desc" data-i18n="mc.scs2">The rewrite, for servers that outgrew a single permission list: roles per claim, 130+ permissions, 70+ protection flags, rent, an exportable audit log.</span>
-                                <svg class="plugin-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
-                            </a>
-                        </li>
-                        <li class="plugin reveal">
-                            <a href="https://github.com/Xyness/XCore" target="_blank" rel="noopener">
-                                <span class="plugin-name">XCore <span class="badge badge-open" data-i18n="badge.open">open source</span></span>
-                                <span class="plugin-desc" data-i18n="mc.xcore">The framework the other X plugins sit on: three cache layers, cross-server sync over Redis, an addon loader, GUIs described in YAML, a multi-currency economy, a web dashboard.</span>
-                                <svg class="plugin-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
-                            </a>
-                        </li>
-                        <li class="plugin reveal">
-                            <a href="https://celestis.dev/plugins/xbans" target="_blank" rel="noopener">
-                                <span class="plugin-name">XBans <span class="badge badge-paid" data-i18n="badge.paid">paid</span></span>
-                                <span class="plugin-desc" data-i18n="mc.xbans">Bans, mutes, warns and jails, plus ban waves. A Bayesian chat classifier trained in five languages reads through obfuscation, and alt detection weighs eleven signals.</span>
-                                <svg class="plugin-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
-                            </a>
-                        </li>
-                        <li class="plugin reveal">
-                            <a href="https://celestis.dev/plugins/xauctionhouse" target="_blank" rel="noopener">
-                                <span class="plugin-name">XAuctionHouse <span class="badge badge-paid" data-i18n="badge.paid">paid</span></span>
-                                <span class="plugin-desc" data-i18n="mc.xah">Fixed-price listings and live auctions in any currency XCore knows, with snipe protection, tiered bids, search and price history.</span>
-                                <svg class="plugin-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
-                            </a>
-                        </li>
-                        <li class="plugin reveal">
-                            <a href="https://celestis.dev/plugins/xlogin" target="_blank" rel="noopener">
-                                <span class="plugin-name">XLogin <span class="badge badge-paid" data-i18n="badge.paid">paid</span></span>
-                                <span class="plugin-desc" data-i18n="mc.xlogin">Online mode decided per player: premium accounts connect with their skin and no password, everyone else registers. TOTP two-factor, sessions shared across servers, one jar for Velocity, BungeeCord and XCore.</span>
-                                <svg class="plugin-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
-                            </a>
-                        </li>
-                        <li class="plugin reveal">
-                            <a href="https://celestis.dev/plugins/xantilag" target="_blank" rel="noopener">
-                                <span class="plugin-name">XAntiLag <span class="badge badge-paid" data-i18n="badge.paid">paid</span></span>
-                                <span class="plugin-desc" data-i18n="mc.xantilag">Prevention rather than cleanup: per-chunk caps, mob and item stackers, redstone clock detection, and a TPS monitor that steps up optimisation as the server degrades and back down as it recovers.</span>
-                                <svg class="plugin-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
             </div>
         </section>
 
@@ -1467,7 +1524,7 @@
 
                 "hero.eyebrow": "Étudiant en info, big data et IA",
                 "hero.title": "Je construis ce que je voulais voir exister.",
-                "hero.lede": "La plupart de ce qui est ici a commencé comme un outil pour un serveur que je gère, un script pour m'éviter une corvée, ou un prétexte pour apprendre quelque chose de nouveau. Et je suis allé au bout, parce que c'est moi qui m'en servais.",
+                "hero.lede": "La plupart de ce qui est ici a commencé comme un outil pour un serveur que je gère, un script pour m'éviter une corvée, ou un prétexte pour apprendre quelque chose de nouveau. Et je suis allé au bout, parce que c'est moi qui m'en servais. L'un d'eux tourne aujourd'hui sur <a href=\"#minecraft\">environ 700 serveurs Minecraft</a>.",
                 "hero.cta1": "Voir les projets",
                 "hero.cta2": "Me contacter",
 
@@ -1475,7 +1532,7 @@
                 "about.title": "La version courte.",
                 "about.p1": "J'étudie l'<strong>informatique, le big data et l'IA</strong>, avec des maths et des statistiques à côté. L'école couvre la théorie. Les projets de cette page sont là où j'apprends vraiment\u00a0: en construisant, en cassant, et en recommençant.",
                 "about.p2": "Je mène un projet jusqu'au bout, du premier schéma d'architecture à la maintenance ennuyeuse qui suit. La <strong>sécurité</strong> occupe une bonne partie de mon attention, surtout parce que je fais tourner des serveurs et que j'ai appris à mes dépens ce qui arrive quand on la néglige.",
-                "fact.running": "tourne sur",
+                "fact.running": "en production",
                 "fact.running.v": "environ 700 serveurs Minecraft",
                 "fact.languages": "langues",
                 "fact.languages.v": "Français, anglais, espagnol",
@@ -1489,26 +1546,30 @@
                 "stack.backend": "Backend",
                 "stack.backend.v": "FastAPI, Node.js, Next.js, API REST",
                 "stack.data": "Data & IA",
-                "stack.data.v": "Pandas, scikit-learn, PyTorch, Spark, Kafka, statistiques",
+                "stack.data.v": "Pandas, scikit-learn, Spark, Kafka, statistiques",
                 "stack.infra": "Infrastructure",
                 "stack.infra.v": "Docker, Linux, Git, CI/CD, VPS et cloud",
                 "stack.security": "Sécurité",
-                "stack.security.v": "Sécurité applicative, audit de serveurs, analyse de menaces",
+                "stack.security.v": "Sécurité applicative, audit de serveurs, cartographie de surface d'attaque",
+                "stack.in": "dans",
 
                 "kicker.projects": "projets",
                 "projects.title": "Ce que j'ai construit.",
                 "projects.intro": "Quatre à montrer en premier. Chacun a un README qui entre dans le détail.",
                 "projects.more": "Le reste est sur GitHub",
-                "proj.sentinel": "Détection d'anomalies en streaming sur des trades crypto\u00a0: Kafka les transporte, Spark en tire des features par minute, un Isolation Forest signale ce qui cloche, un client terminal affiche le résultat. Un simulateur injecte des anomalies exprès, pour mesurer le détecteur plutôt que lui faire confiance.",
-                "proj.phantom": "Cartographie la surface d'attaque d'une machine que vous avez le droit de scanner\u00a0: ports ouverts et ce qui se cache derrière, DNS et sous-domaines, configuration TLS et HTTP, fichiers oubliés à la racine d'un site. Le scanner de ports est un binaire Rust à part, et chaque scan atterrit dans un fichier SQLite qu'on peut lister, comparer et exporter.",
-                "proj.sysaudit": "Un audit de sécurité en ligne de commande de la machine devant vous, sous Linux, macOS ou Windows\u00a0: services, ports en écoute, pare-feu, comptes, clés SSH, permissions, paquets confrontés à OSV.dev. En sortie, une note sur 100 et un seul rapport HTML autonome, chaque problème accompagné des commandes qui le corrigent.",
-                "proj.gitpulse": "Tapez un pseudo GitHub et le profil revient sous une forme qui vaut le coup d'œil\u00a0: les dépôts en constellation à simulation de forces, une heatmap de contributions cliquable, un streamgraph des langages au fil des années, et un récap façon Wrapped avec sa propre URL à partager. Pas besoin de se connecter.",
+                "proj.sentinel": "Détection d'anomalies en streaming sur des trades crypto\u00a0: Kafka les transporte, Spark en tire des features par minute, un Isolation Forest signale ce qui cloche. Un simulateur injecte des anomalies exprès, pour mesurer le détecteur plutôt que lui faire confiance.",
+                "proj.sentinel.stat": "Tout le pipeline testé en CI, de bout en bout",
+                "proj.phantom": "Cartographie la surface d'attaque d'une machine que vous avez le droit de scanner\u00a0: ports ouverts et ce qui se cache derrière, DNS et sous-domaines, configuration TLS et HTTP, fichiers oubliés à la racine d'un site. Le scanner de ports est un binaire Rust à part.",
+                "proj.phantom.stat": "338 tests Python et 8 tests Rust, tous hors ligne",
+                "proj.sysaudit": "Un audit de sécurité en ligne de commande de la machine devant vous, sous Linux, macOS ou Windows. En sortie, une note sur 100 et un seul rapport HTML autonome, chaque problème accompagné des commandes qui le corrigent.",
+                "proj.sysaudit.stat": "394 tests, CI sous Linux, macOS et Windows",
+                "proj.gitpulse": "Tapez un pseudo GitHub et le profil revient en constellation de dépôts, heatmap de contributions cliquable, langages au fil des années et récap façon Wrapped avec sa propre URL. Pas besoin de se connecter.",
                 "proj.live": "live",
 
                 "mc.title": "Plugins Minecraft",
-                "mc.intro": "Deux plugins de protection de terrain et un framework avec ses propres addons, tous en production sur de vrais serveurs, certains open source, d'autres payants. Le coin de la programmation où je reviens toujours.",
+                "mc.intro": "Deux plugins de protection de terrain et un framework avec ses propres addons, écrits en Java et en production sur de vrais serveurs, certains open source, d'autres payants. Le coin de la programmation où je reviens toujours.",
                 "mc.scs": "Protection de terrain par chunk\u00a0: des menus pour revendiquer, fusionner et revendre, plus de 30 réglages par claim, intégration aux cartes, une API pour les autres plugins. 1.18+, Folia compris.",
-                "mc.scs.stats": "Plus de 100k téléchargements, environ 700 serveurs, noté 4,9/5 sur Spigot",
+                "mc.scs.stats": "Plus de 100k téléchargements, <a href=\"https://bstats.org/plugin/bukkit/SimpleClaimSystem/21435\" target=\"_blank\" rel=\"noopener\">environ 700 serveurs</a>, <a href=\"https://www.spigotmc.org/resources/115568/\" target=\"_blank\" rel=\"noopener\">noté 4,9/5 sur Spigot</a>",
                 "mc.scs2": "La réécriture, pour les serveurs qui ont dépassé le stade d'une seule liste de permissions\u00a0: rôles par claim, plus de 130 permissions, plus de 70 flags de protection, loyers, journal d'audit exportable.",
                 "mc.xcore": "Le framework sur lequel reposent les autres plugins X\u00a0: trois niveaux de cache, synchronisation inter-serveurs via Redis, chargeur d'addons, menus décrits en YAML, économie multi-devises, dashboard web.",
                 "mc.xbans": "Bans, mutes, avertissements et prisons, plus des vagues de bannissement. Un classifieur bayésien entraîné en cinq langues lit à travers l'obfuscation, et la détection de comptes multiples croise onze signaux.",
